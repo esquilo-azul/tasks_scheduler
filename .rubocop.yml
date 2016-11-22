@@ -23,3 +23,7 @@ Metrics/MethodLength:
   Exclude:
     - 'db/migrate/**/*'
     - 'test/**/*'
+
+Metrics/ParameterLists:
+  Exclude:
+    - lib/tasks_scheduler/cron_parser_patch.rb
