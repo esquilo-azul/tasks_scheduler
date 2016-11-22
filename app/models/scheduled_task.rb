@@ -1,6 +1,8 @@
 require 'rake'
 
 class ScheduledTask < ActiveRecord::Base
+  include ::ScheduledTask::Checker
+
   class << self
     def rake_tasks
       @rake_tasks ||= begin
@@ -15,6 +17,10 @@ class ScheduledTask < ActiveRecord::Base
 
   def cron_parser
     @cron_parser ||= ::CronParser.new(scheduling)
+  end
+
+  def to_s
+    "S: #{scheduling}, T: #{task}, NR: #{next_run.present? ? next_run.in_time_zone : '-'}"
   end
 
   def calculate_next_run(time = nil)

@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+
+def find_rails_root(dir = Dir.pwd)
+  fail 'Rails root not found' if dir == '' || dir == '/' || dir == '.'
+  return dir if File.exist?(File.expand_path('config/environment.rb', dir))
+  rails_root(File.dirname(dir))
+end
+
+rails_root = find_rails_root
+require File.join(rails_root, 'config', 'environment')
+::TasksScheduler::Checker.instance.run
