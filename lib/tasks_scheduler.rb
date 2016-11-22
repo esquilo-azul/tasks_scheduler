@@ -1,4 +1,4 @@
-require "tasks_scheduler/engine"
+require 'tasks_scheduler/engine'
 
 module TasksScheduler
 end
