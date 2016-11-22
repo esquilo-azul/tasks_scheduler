@@ -1,0 +1,23 @@
+AllCops:
+  RunRailsCops: true
+
+Style/Documentation:
+  Enabled: false
+
+Style/AsciiComments:
+  Enabled: false
+
+Metrics/AbcSize:
+  Exclude:
+    - 'db/migrate/**/*'
+    - 'test/**/*'
+
+Metrics/LineLength:
+  Max: 100
+  Exclude:
+    - 'db/migrate/**/*'
+
+Metrics/MethodLength:
+  Exclude:
+    - 'db/migrate/**/*'
+    - 'test/**/*'
