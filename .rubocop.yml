@@ -1,5 +1,7 @@
 AllCops:
   RunRailsCops: true
+  Exclude:
+    - test/dummy/db/schema.rb
 
 Style/Documentation:
   Enabled: false
