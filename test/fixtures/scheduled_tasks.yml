@@ -1,0 +1,4 @@
+test_scheduling:
+  scheduling: 0 0 * * *
+  task: test
+  next_run: 2016-11-22 09:38:28

@@ -1,0 +1,12 @@
+en:  
+  activerecord:
+    models:
+      scheduled_task:
+        one: Scheduled task
+        other: Scheduled tasks
+  helpers:
+      label:
+        scheduled_task:
+          scheduling: Scheduling
+          task: Task
+          next_run: Next run

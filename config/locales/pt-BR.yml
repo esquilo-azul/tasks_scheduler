@@ -1,0 +1,12 @@
+pt-BR:  
+  activerecord:
+    models:
+      scheduled_task:
+        one: Tarefa agendada
+        other: Tarefas agendadas
+  helpers:
+      label:
+        scheduled_task:
+          scheduling: Agendamento
+          task: Tarefa
+          next_run: Próxima execução
