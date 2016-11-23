@@ -11,14 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161122123828) do
+ActiveRecord::Schema.define(version: 20161123130153) do
 
   create_table "scheduled_tasks", force: :cascade do |t|
     t.string   "scheduling"
     t.string   "task"
     t.datetime "next_run"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.datetime "last_run_start"
+    t.datetime "last_run_successful_start"
+    t.datetime "last_run_successful_end"
+    t.datetime "last_run_unsuccessful_start"
+    t.datetime "last_run_unsuccessful_end"
   end
 
 end

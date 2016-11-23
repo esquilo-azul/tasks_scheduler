@@ -10,3 +10,10 @@ pt-BR:
           scheduling: Agendamento
           task: Tarefa
           next_run: Próxima execução
+          status: Status
+  current_run: Execução atual
+  end: Término
+  last_successful_run: Última execução com sucesso
+  last_unsuccessful_run: Última execução com falha
+  start: Início
+  tasks_scheduler_status: Tarefas agendadas - Status

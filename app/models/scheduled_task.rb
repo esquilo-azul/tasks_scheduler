@@ -2,6 +2,7 @@ require 'rake'
 
 class ScheduledTask < ActiveRecord::Base
   include ::ScheduledTask::Checker
+  include ::ScheduledTask::Status
 
   class << self
     def rake_tasks
@@ -14,6 +15,10 @@ class ScheduledTask < ActiveRecord::Base
 
   validates :scheduling, presence: true, 'tasks_scheduler/cron_scheduling': true
   validates :task, presence: true, inclusion: { in: rake_tasks }
+
+  STATUS_RUNNING = 'running'
+  STATUS_FAILED = 'failed'
+  STATUS_WAITING = 'waiting'
 
   def cron_parser
     @cron_parser ||= ::CronParser.new(scheduling)

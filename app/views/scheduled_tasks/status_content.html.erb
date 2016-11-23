@@ -1,0 +1,38 @@
+<p>
+  <strong>Last update: </strong>
+  <%= I18n.l(Time.zone.now, format: :short) %>
+</p>
+<table>
+  <thead>
+    <tr>
+      <th rowspan="2"><%= I18n.t('helpers.label.scheduled_task.task') %></th>
+      <th rowspan="2"><%= I18n.t('helpers.label.scheduled_task.scheduling') %></th>
+      <th rowspan="2"><%= I18n.t('helpers.label.scheduled_task.next_run') %></th>
+      <th rowspan="2"><%= I18n.t('helpers.label.scheduled_task.status') %></th>
+      <th rowspan="2"><%= I18n.t('current_run') %></th>
+      <th colspan="2"><%= I18n.t('last_successful_run') %></th>
+      <th colspan="2"><%= I18n.t('last_unsuccessful_run') %></th>
+    </tr>
+    <tr>
+      <th><%= I18n.t('start') %></th>
+      <th><%= I18n.t('end') %></th>
+      <th><%= I18n.t('start') %></th>
+      <th><%= I18n.t('end') %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @scheduled_tasks.each do |st| %>
+      <tr>
+        <td style="text-align: left"><%= st.task %></td>
+        <td style="text-align: left"><%= st.scheduling %></td>
+        <td><%= scheduled_tasks_status_time(st.next_run) %></td>
+        <td class="status_<%= st.status %>"><%= st.status.upcase %></td>
+        <td><%= scheduled_tasks_status_time(st.last_run_start) %></td>
+        <td><%= scheduled_tasks_status_time(st.last_run_successful_start) %></td>
+        <td><%= scheduled_tasks_status_time(st.last_run_successful_end) %></td>
+        <td><%= scheduled_tasks_status_time(st.last_run_unsuccessful_start) %></td>
+        <td><%= scheduled_tasks_status_time(st.last_run_unsuccessful_end) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

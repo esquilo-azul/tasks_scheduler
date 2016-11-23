@@ -37,22 +37,23 @@ class ScheduledTask < ActiveRecord::Base
     end
 
     def run_task
-      update_attributes!(last_run_start: Time.zone.now)
-      invoke_task
-      on_run_task_end
+      status_on_start
+      exception = invoke_task
+      check_log(exception, :fatal) if exception
+      status_on_end(exception)
+      check_log("Next run: #{next_run.in_time_zone}")
     end
 
     def invoke_task
-      Rake::Task.clear
-      Rails.application.load_tasks
-      Rake::Task[task].invoke
-    rescue StandardError => ex
-      check_log(ex, :fatal)
-    end
-
-    def on_run_task_end
-      update_attributes!(next_run: calculate_next_run)
-      check_log("Next run: #{next_run.in_time_zone}")
+      exception = nil
+      begin
+        Rake::Task.clear
+        Rails.application.load_tasks
+        Rake::Task[task].invoke
+      rescue StandardError => ex
+        exception = ex
+      end
+      exception
     end
   end
 end

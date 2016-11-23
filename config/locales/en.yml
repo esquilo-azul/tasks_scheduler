@@ -10,3 +10,10 @@ en:
           scheduling: Scheduling
           task: Task
           next_run: Next run
+          status: Status
+  current_run: Current run
+  end: End
+  last_successful_run: Last successful run
+  last_unsuccessful_run: Last unsuccessful run
+  start: Start
+  tasks_scheduler_status: Scheduled tasks - Status

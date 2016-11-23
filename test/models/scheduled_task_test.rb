@@ -29,6 +29,27 @@ class ScheduledTaskTest < ActiveSupport::TestCase
     end
   end
 
+  test 'status' do
+    assert_not @scheduled_task.last_run_start
+    assert_not @scheduled_task.last_run_successful_start
+    assert_not @scheduled_task.last_run_unsuccessful_start
+    assert_not @scheduled_task.last_run_successful_end
+    assert_not @scheduled_task.last_run_unsuccessful_end
+    assert_equal ScheduledTask::STATUS_WAITING, @scheduled_task.status
+
+    @scheduled_task.send('status_on_start')
+    assert_equal ScheduledTask::STATUS_RUNNING, @scheduled_task.status
+
+    @scheduled_task.send('status_on_end', nil)
+    assert_equal ScheduledTask::STATUS_WAITING, @scheduled_task.status
+
+    @scheduled_task.send('status_on_start')
+    assert_equal ScheduledTask::STATUS_RUNNING, @scheduled_task.status
+
+    @scheduled_task.send('status_on_end', StandardError.new('Test!'))
+    assert_equal ScheduledTask::STATUS_FAILED, @scheduled_task.status
+  end
+
   test 'task in list' do
     valid_invalid_column_values_test(
       @scheduled_task, :task, ['test', 'about', 'db:migrate'], [nil, '  ', '123notatask']

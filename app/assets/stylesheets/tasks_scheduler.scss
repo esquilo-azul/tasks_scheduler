@@ -1,1 +1,33 @@
 @import 'active_scaffold';
+
+#TaskScheduler_Status_Status {
+  font-size: small;
+  margin-bottom: 1.0em;
+}
+
+#TaskScheduler_Status_Content {
+  table {
+    border-collapse: collapse;
+
+    td, th {
+      border: thin solid black;
+      padding: 0.3em;
+    }
+
+    td.status_running {
+      color: blue;
+    }
+
+    td.status_waiting {
+      color: darkgrey;
+    }
+
+    td.status_failed {
+      color: red;
+    }
+  }
+
+  .last_run {
+    font-weight: bold;
+  }
+}
