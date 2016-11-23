@@ -12,6 +12,11 @@ class ScheduledTasksController < ApplicationController
     conf.action_links.add :status, label: I18n.t(:tasks_scheduler_status), position: true
   end
 
+  def log
+    record = find_if_allowed(params[:id], :read)
+    @log_file = record.log_file(params[:identifier])
+  end
+
   def status
   end
 

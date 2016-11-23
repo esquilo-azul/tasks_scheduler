@@ -1,0 +1,9 @@
+<p>Log file: <%= @log_file %></p>
+<% if File.exist?(@log_file) %>
+  <p>Content: </p>
+  <pre>
+    <%= File.read(@log_file) %>
+  </pre>
+<% else %>
+  <p><em>File does not exist.</em></p>
+<% end %>

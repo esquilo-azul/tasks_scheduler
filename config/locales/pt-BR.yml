@@ -15,5 +15,6 @@ pt-BR:
   end: Término
   last_successful_run: Última execução com sucesso
   last_unsuccessful_run: Última execução com falha
+  log: Log
   start: Início
   tasks_scheduler_status: Tarefas agendadas - Status

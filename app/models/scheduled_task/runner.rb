@@ -1,12 +1,14 @@
 class ScheduledTask < ActiveRecord::Base
   module Runner
     def run
+      log_on_start
       run_banner
       return if process_running? && pid != Process.pid
       status_on_start
       exception = invoke_task
       run_log(exception, :fatal) if exception
       status_on_end(exception)
+      log_on_end(exception)
       run_log("Next run: #{next_run.in_time_zone}")
     end
 

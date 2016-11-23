@@ -2,8 +2,9 @@ require 'rake'
 
 class ScheduledTask < ActiveRecord::Base
   include ::ScheduledTask::Checker
-  include ::ScheduledTask::Status
+  include ::ScheduledTask::Log
   include ::ScheduledTask::Runner
+  include ::ScheduledTask::Status
 
   class << self
     def rake_tasks
@@ -20,6 +21,10 @@ class ScheduledTask < ActiveRecord::Base
   STATUS_RUNNING = 'running'
   STATUS_FAILED = 'failed'
   STATUS_WAITING = 'waiting'
+
+  LOG_RUNNING = 'running'
+  LOG_SUCCESSFUL = 'successful'
+  LOG_UNSUCCESSFUL = 'unsuccessful'
 
   def cron_parser
     @cron_parser ||= ::CronParser.new(scheduling)
