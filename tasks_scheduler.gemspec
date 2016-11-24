@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
   s.executables = s.files.grep(%r{^exe/}) { |f| File.basename(f) }
 
   s.add_dependency 'active_scaffold'
+  s.add_dependency 'daemons'
   s.add_dependency 'parse-cron'
   s.add_dependency 'rails', '~> 4.2.1'
 
