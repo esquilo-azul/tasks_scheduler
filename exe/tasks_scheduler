@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
 
 require 'rubygems'
+require 'daemons'
+require 'fileutils'
 
 def find_rails_root(dir = Dir.pwd)
   fail 'Rails root not found' if dir == '' || dir == '/' || dir == '.'
@@ -9,5 +11,9 @@ def find_rails_root(dir = Dir.pwd)
 end
 
 rails_root = find_rails_root
-require File.join(rails_root, 'config', 'environment')
-::TasksScheduler::Checker.instance.run
+dir = File.expand_path('tmp/pids', rails_root)
+FileUtils.mkdir_p(dir)
+Daemons.run_proc 'tasks_scheduler', dir_mode: :normal, dir: dir do
+  require File.join(rails_root, 'config', 'environment')
+  ::TasksScheduler::Checker.instance.run
+end
