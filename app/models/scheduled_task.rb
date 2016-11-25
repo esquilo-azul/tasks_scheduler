@@ -3,6 +3,7 @@ require 'rake'
 class ScheduledTask < ActiveRecord::Base
   include ::ScheduledTask::Checker
   include ::ScheduledTask::Status
+  include ::ScheduledTask::Runner
 
   class << self
     def rake_tasks
@@ -39,5 +40,17 @@ class ScheduledTask < ActiveRecord::Base
   def write_attribute(name, value)
     @cron_parser = nil if name == 'scheduling'
     super
+  end
+
+  def process_running?
+    return false if pid.nil?
+    Process.kill(0, pid)
+    return true
+  rescue Errno::EPERM
+    raise "No permission to query #{pid}!"
+  rescue Errno::ESRCH
+    return false
+  rescue
+    raise "Unable to determine status for #{pid}"
   end
 end

@@ -4,6 +4,10 @@ class ScheduledTask < ActiveRecord::Base
   module Checker
     def check
       check_banner
+      if process_running?
+        check_log("Already running (PID: #{pid})")
+        return
+      end
       if next_run.present?
         check_task_with_next_run
       else
@@ -30,30 +34,21 @@ class ScheduledTask < ActiveRecord::Base
     def check_task_with_next_run
       if next_run < Time.zone.now
         check_log('Next run reached. Running...')
-        run_task
+        spawn_task
       else
         check_log('Next run not reached')
       end
     end
 
-    def run_task
-      status_on_start
-      exception = invoke_task
-      check_log(exception, :fatal) if exception
-      status_on_end(exception)
-      check_log("Next run: #{next_run.in_time_zone}")
-    end
-
-    def invoke_task
-      exception = nil
-      begin
-        Rake::Task.clear
-        Rails.application.load_tasks
-        Rake::Task[task].invoke
-      rescue StandardError => ex
-        exception = ex
+    def spawn_task
+      params = ['bundle', 'exec', 'tasks_scheduler_run_task', id.to_s]
+      check_log("Spawn command: #{params}")
+      spawn_pid = nil
+      Dir.chdir(Rails.root) do
+        spawn_pid = Process.spawn(*params)
       end
-      exception
+      Process.detach(spawn_pid)
+      update_attributes!(pid: spawn_pid)
     end
   end
 end

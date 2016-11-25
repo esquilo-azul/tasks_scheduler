@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161123130153) do
+ActiveRecord::Schema.define(version: 20161124200712) do
 
   create_table "scheduled_tasks", force: :cascade do |t|
     t.string   "scheduling"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20161123130153) do
     t.datetime "last_run_successful_end"
     t.datetime "last_run_unsuccessful_start"
     t.datetime "last_run_unsuccessful_end"
+    t.integer  "pid"
   end
 
 end

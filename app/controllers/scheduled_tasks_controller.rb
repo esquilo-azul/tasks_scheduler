@@ -3,7 +3,8 @@ class ScheduledTasksController < ApplicationController
     [:create, :update, :list].each do |action|
       conf.send(action).columns.exclude(:next_run, :last_run_start,
                                         :last_run_successful_start, :last_run_unsuccessful_start,
-                                        :last_run_successful_end, :last_run_unsuccessful_end)
+                                        :last_run_successful_end, :last_run_unsuccessful_end,
+                                        :pid)
     end
     conf.columns[:task].form_ui = :select
     conf.columns[:task].options ||= {}

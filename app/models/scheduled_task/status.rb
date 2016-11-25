@@ -35,7 +35,8 @@ class ScheduledTask < ActiveRecord::Base
         next_run: calculate_next_run,
         (exception ? :last_run_unsuccessful_start : :last_run_successful_start) => last_run_start,
         (exception ? :last_run_unsuccessful_end : :last_run_successful_end) => Time.zone.now,
-        last_run_start: nil
+        last_run_start: nil,
+        pid: nil
       )
     end
 
