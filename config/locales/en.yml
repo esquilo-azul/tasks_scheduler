@@ -17,5 +17,6 @@ en:
   last_successful_run: Last successful run
   last_unsuccessful_run: Last unsuccessful run
   log: Log
+  run_now: Run now
   start: Start
   tasks_scheduler_status: Scheduled tasks - Status

@@ -10,6 +10,8 @@ class ScheduledTasksController < ApplicationController
     conf.columns[:task].options ||= {}
     conf.columns[:task].options[:options] = task_column_options
     conf.action_links.add :status, label: I18n.t(:tasks_scheduler_status), position: true
+    conf.action_links.add :run_now, label: I18n.t(:run_now), type: :member,
+                                    crud_type: :update, method: :put, position: false
   end
 
   def log
@@ -23,6 +25,14 @@ class ScheduledTasksController < ApplicationController
   def status_content
     @scheduled_tasks = ::ScheduledTask.order(task: :asc, scheduling: :asc)
     render layout: false
+  end
+
+  def run_now
+    process_action_link_action do |record|
+      record.update_attributes!(next_run: Time.zone.now)
+      record.reload
+      flash[:info] = "Next run adjusted to #{record.next_run}"
+    end
   end
 
   class << self

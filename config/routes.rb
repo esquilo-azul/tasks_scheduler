@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     end
     member do
       get :log
+      put :run_now
     end
   end
 end
