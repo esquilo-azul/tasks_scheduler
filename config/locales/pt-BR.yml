@@ -7,6 +7,7 @@ pt-BR:
   helpers:
       label:
         scheduled_task:
+          args: Parâmetros
           scheduling: Agendamento
           task: Tarefa
           next_run: Próxima execução

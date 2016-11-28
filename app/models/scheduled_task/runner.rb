@@ -34,12 +34,17 @@ class ScheduledTask < ActiveRecord::Base
       begin
         Rake::Task.clear
         Rails.application.load_tasks
-        Rake::Task[task].invoke
+        Rake::Task[task].invoke(invoke_args)
       rescue StandardError => ex
         run_log(ex, :fatal)
         exception = ex
       end
       exception
+    end
+
+    def invoke_args
+      return [] unless args.present?
+      args.split('|')
     end
   end
 end

@@ -55,4 +55,18 @@ class ScheduledTaskTest < ActiveSupport::TestCase
       @scheduled_task, :task, ['test', 'about', 'db:migrate'], [nil, '  ', '123notatask']
     )
   end
+
+  test 'invoke args' do
+    @scheduled_task.args = ''
+    assert_equal [], @scheduled_task.send('invoke_args')
+
+    @scheduled_task.args = 'abc'
+    assert_equal ['abc'], @scheduled_task.send('invoke_args')
+
+    @scheduled_task.args = 'abc|def|ghi'
+    assert_equal %w(abc def ghi), @scheduled_task.send('invoke_args')
+
+    @scheduled_task.args = 'abc||ghi'
+    assert_equal ['abc', '', 'ghi'], @scheduled_task.send('invoke_args')
+  end
 end
