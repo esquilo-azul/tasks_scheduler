@@ -1,4 +1,12 @@
 class ScheduledTasksController < ApplicationController
+  class << self
+    private
+
+    def task_column_options
+      ::ScheduledTask.rake_tasks.map { |st| [st, st] }
+    end
+  end
+
   active_scaffold :scheduled_task do |conf|
     [:create, :update, :list].each do |action|
       conf.send(action).columns.exclude(:next_run, :last_run_start,
@@ -32,14 +40,6 @@ class ScheduledTasksController < ApplicationController
       record.update_attributes!(next_run: Time.zone.now)
       record.reload
       flash[:info] = "Next run adjusted to #{record.next_run}"
-    end
-  end
-
-  class << self
-    private
-
-    def task_column_options
-      ::ScheduledTask.rake_tasks.map { |st| [st, st] }
     end
   end
 end
