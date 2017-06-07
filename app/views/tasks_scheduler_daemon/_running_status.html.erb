@@ -1,0 +1,6 @@
+<strong>Daemon status: </strong>
+<% if TasksScheduler::Daemon.running? %>
+  <span class="tasks_scheduler_daemon_status_up">UP</span>
+<% else %>
+  <span class="tasks_scheduler_daemon_status_down">DOWN</span>
+<% end %>

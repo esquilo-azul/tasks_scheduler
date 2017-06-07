@@ -1,6 +1,8 @@
 <p>
   <strong>Last update: </strong>
   <%= I18n.l(Time.zone.now, format: :short) %>
+  <br/>
+  <%= render partial: '/tasks_scheduler_daemon/running_status' %>
 </p>
 <table>
   <thead>

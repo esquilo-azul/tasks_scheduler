@@ -24,6 +24,10 @@ module TasksScheduler
           end
         end
       end
+
+      def running?
+        execute('status')[:status].zero?
+      end
     end
   end
 end

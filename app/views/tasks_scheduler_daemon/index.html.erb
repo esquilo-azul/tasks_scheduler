@@ -1,5 +1,7 @@
 <h2><%= I18n.t(:tasks_scheduler_daemon) %></h2>
 <p>
+  <%= render partial: '/tasks_scheduler_daemon/running_status' %>
+  <br/>
   <strong>Actions: </strong>
   <%= safe_join(::TasksScheduler::Daemon::ACTIONS.map do |action|
       link_to action, execute_tasks_scheduler_daemon_path(action), method: :post

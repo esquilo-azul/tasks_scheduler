@@ -32,3 +32,11 @@
     font-weight: bold;
   }
 }
+
+.tasks_scheduler_daemon_status_down {
+  color: red;
+}
+
+.tasks_scheduler_daemon_status_up {
+  color: blue;
+}
