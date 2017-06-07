@@ -19,4 +19,5 @@ en:
   log: Log
   run_now: Run now
   start: Start
+  tasks_scheduler_daemon: Scheduled tasks - Daemon
   tasks_scheduler_status: Scheduled tasks - Status

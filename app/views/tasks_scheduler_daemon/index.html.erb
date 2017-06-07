@@ -1,0 +1,16 @@
+<h2><%= I18n.t(:tasks_scheduler_daemon) %></h2>
+<p>
+  <strong>Actions: </strong>
+  <%= safe_join(::TasksScheduler::Daemon::ACTIONS.map do |action|
+      link_to action, execute_tasks_scheduler_daemon_path(action), method: :post
+    end, ' | ') %>
+</p>
+<% if @result %>
+  <h3>Results</h3>
+  <dl>
+    <% @result.each do |k, v| %>
+      <dt><%= k %></dt>
+      <dd><%= v.present? ? v : '-' %></dd>
+    <% end %>
+  </dl>
+<% end %>
