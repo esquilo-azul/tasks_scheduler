@@ -17,7 +17,6 @@ class ScheduledTasksController < ApplicationController
     conf.columns[:task].form_ui = :select
     conf.columns[:task].options ||= {}
     conf.columns[:task].options[:options] = task_column_options
-    conf.action_links.add :status, label: I18n.t(:tasks_scheduler_status), position: true
     conf.action_links.add :run_now, label: I18n.t(:run_now), type: :member,
                                     crud_type: :update, method: :put, position: false
   end

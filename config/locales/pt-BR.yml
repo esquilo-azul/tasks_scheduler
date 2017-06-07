@@ -19,5 +19,6 @@ pt-BR:
   log: Log
   run_now: Executar agora
   start: Início
+  scheduled_tasks: Tarefas agendadas - Edição
   tasks_scheduler_daemon: Tarefas agendadas - Daemon
   tasks_scheduler_status: Tarefas agendadas - Status
