@@ -57,3 +57,47 @@ _S.update = function () {
     }
   });
 };
+
+TasksScheduler.Alert = function () {
+};
+
+_A = TasksScheduler.Alert;
+
+_A.DEFAULT_REFRESH_INTERVAL = 60000;
+_A.DEFAULT_ELEMENT_SELECTOR = '#tasks_scheduler_alert';
+_A.url = null;
+
+_A.init = function (url, options = {}) {
+  $(document).ready(function () {
+    _A.url = url;
+    _A.options = options;
+    if (!_A.options.refresh_interval) {
+      _A.options.refresh_interval = _A.DEFAULT_REFRESH_INTERVAL;
+    }
+    if (!_A.options.element_selector) {
+      _A.options.element_selector = _A.DEFAULT_ELEMENT_SELECTOR;
+    }
+    _A.refresh();
+  });
+};
+
+_A.setNextRefresh = function () {
+  setTimeout(_A.refresh, _A.options.refresh_interval);
+};
+
+_A.refresh = function () {
+  $.ajax({
+    url: _A.url,
+    success: function (result) {
+      var alert = $(_A.options.element_selector);
+      if (result === 'true') {
+        alert.hide();
+      } else {
+        alert.show();
+      }
+    },
+    complete: function (result) {
+      _A.setNextRefresh();
+    }
+  });
+};
