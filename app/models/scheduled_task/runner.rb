@@ -27,6 +27,7 @@ class ScheduledTask < ActiveRecord::Base
       run_log("Task: #{self}")
       run_log("PID: #{pid ? pid : '-'} (Current: #{Process.pid})")
       run_log("Process running? #{process_running? ? 'Yes' : 'No'}")
+      run_log("Rails.env: #{Rails.env}")
     end
 
     def invoke_task
