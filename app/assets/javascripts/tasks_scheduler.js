@@ -4,7 +4,7 @@ function TasksScheduler() {
 }
 
 TasksScheduler.Status = function () {
-}
+};
 
 // Shortcut
 var _S = TasksScheduler.Status;
@@ -67,7 +67,8 @@ _A.DEFAULT_REFRESH_INTERVAL = 60000;
 _A.DEFAULT_ELEMENT_SELECTOR = '#tasks_scheduler_alert';
 _A.url = null;
 
-_A.init = function (url, options = {}) {
+_A.init = function (url, options) {
+  options = typeof options !== 'undefined' ? options : {};
   $(document).ready(function () {
     _A.url = url;
     _A.options = options;
