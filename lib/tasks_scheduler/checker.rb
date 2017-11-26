@@ -6,9 +6,7 @@ module TasksScheduler
 
     def run
       running = true
-      Signal.trap('TERM') do
-        running = false
-      end
+      Signal.trap('TERM') { running = false }
       while running
         Rails.logger.info('Checking all tasks...')
         ::ScheduledTask.all.each(&:check)

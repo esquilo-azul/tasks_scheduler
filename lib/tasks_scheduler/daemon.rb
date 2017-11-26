@@ -8,7 +8,6 @@ module TasksScheduler
       def execute(action)
         raise "Action not allowed: #{action} (Allowed: #{ACTIONS})" unless ACTIONS.include?(action)
         command = ['bundle', 'exec', 'tasks_scheduler', action]
-        env_args = { 'RAILS_ENV' => Rails.env }
         Dir.chdir(Rails.root) do
           Open3.popen3(env_args, *command) do |_stdin, stdout, stderr, wait_thr|
             { action: action, env_args: env_args.map { |k, v| "#{k}=#{v}" }.join(' | '),
@@ -20,6 +19,10 @@ module TasksScheduler
 
       def running?
         execute('status')[:status].zero?
+      end
+
+      def env_args
+        { 'RAILS_ENV' => Rails.env }
       end
     end
   end
