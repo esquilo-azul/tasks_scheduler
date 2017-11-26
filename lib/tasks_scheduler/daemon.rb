@@ -22,7 +22,7 @@ module TasksScheduler
       end
 
       def env_args
-        { 'RAILS_ENV' => Rails.env }
+        { 'RAILS_ENV' => Rails.env, ::TasksScheduler::Checker::LOG_ON_FILE_ENV_KEY => '1' }
       end
     end
   end
