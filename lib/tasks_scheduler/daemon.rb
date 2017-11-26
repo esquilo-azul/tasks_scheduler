@@ -5,15 +5,6 @@ module TasksScheduler
     ACTIONS = %w(status start stop restart).freeze
 
     class << self
-      def run(rails_root)
-        dir = File.expand_path('tmp/pids', rails_root)
-        FileUtils.mkdir_p(dir)
-        Daemons.run_proc 'tasks_scheduler', dir_mode: :normal, dir: dir do
-          require File.join(rails_root, 'config', 'environment')
-          ::TasksScheduler::Checker.instance.run
-        end
-      end
-
       def execute(action)
         raise "Action not allowed: #{action} (Allowed: #{ACTIONS})" unless ACTIONS.include?(action)
         command = ['bundle', 'exec', 'tasks_scheduler', action]
