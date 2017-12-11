@@ -8,7 +8,7 @@ class TasksSchedulerDaemonController < ApplicationController
   end
 
   def status
-    render plain: (::TasksScheduler::Daemon.running? ? 'true' : 'false'), layout: false
+    render json: { daemon_running: ::TasksScheduler::Daemon.running? }
   end
 
   def download_log

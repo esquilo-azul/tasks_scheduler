@@ -91,7 +91,7 @@ _A.refresh = function () {
     url: _A.url,
     success: function (result) {
       var alert = $(_A.options.element_selector);
-      if (result === 'true') {
+      if (result.daemon_running) {
         alert.hide();
       } else {
         alert.show();
