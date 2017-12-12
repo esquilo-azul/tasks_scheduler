@@ -7,6 +7,10 @@ class ScheduledTask < ActiveRecord::Base
       last_fail_status.present? ? last_fail_status : STATUS_FAILED
     end
 
+    def failed?
+      [STATUS_FAILED, STATUS_ABORTED, STATUS_TIMEOUT].include?(status)
+    end
+
     def running?
       last_run_start.present?
     end

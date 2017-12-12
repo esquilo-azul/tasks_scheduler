@@ -1,8 +1,46 @@
-#tasks_scheduler_alert {
-  color: red !important;
+.tasks_scheduler_alert_link {
   font-weight: bold;
   content: '!';
   &::after {
     content: '!';
+  }
+}
+
+#tasks_scheduler_alert {
+  .daemon_alert {
+    @extend .tasks_scheduler_alert_link;
+    color: red !important;
+  }
+
+  .task_alert {
+    @extend .tasks_scheduler_alert_link;
+    color: yellow !important;
+  }
+
+  &, &.alert_ok {
+    .daemon_alert {
+      display: none;
+    }
+    .task_alert {
+      display: none;
+    }
+  }
+
+  &.alert_daemon_stopped {
+    .daemon_alert {
+      display: inline;
+    }
+    .task_alert {
+      display: none;
+    }
+  }
+
+  &.alert_task_failed {
+    .daemon_alert {
+      display: none;
+    }
+    .task_alert {
+      display: inline;
+    }
   }
 }
