@@ -7,6 +7,9 @@
   <%= safe_join(::TasksScheduler::Daemon::ACTIONS.map do |action|
       link_to action, execute_tasks_scheduler_daemon_path(action), method: :post
     end, ' | ') %>
+  <br/>
+  <strong>Log: </strong>
+  <%= link_to 'download', download_log_tasks_scheduler_daemon_path %>
 </p>
 <% if @result %>
   <h3>Results</h3>

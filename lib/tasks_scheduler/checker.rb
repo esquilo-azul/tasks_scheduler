@@ -17,6 +17,10 @@ module TasksScheduler
       end
     end
 
+    def log_path
+      ::Rails.root.join('log', 'tasks_scheduler', 'checker.log')
+    end
+
     private
 
     def check_log
@@ -27,10 +31,6 @@ module TasksScheduler
 
     def log_on_file?
       ENV[LOG_ON_FILE_ENV_KEY].present?
-    end
-
-    def log_path
-      ::Rails.root.join('log', 'tasks_scheduler', 'checker.log')
     end
   end
 end
