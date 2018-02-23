@@ -9,7 +9,7 @@ class ScheduledTasksController < ApplicationController
 
   active_scaffold :scheduled_task do |conf|
     [:create, :update, :list].each do |action|
-      conf.send(action).columns.exclude(:next_run, :last_run_start,
+      conf.send(action).columns.exclude(:next_run, :last_fail_status, :last_run_start,
                                         :last_run_successful_start, :last_run_unsuccessful_start,
                                         :last_run_successful_end, :last_run_unsuccessful_end,
                                         :pid)

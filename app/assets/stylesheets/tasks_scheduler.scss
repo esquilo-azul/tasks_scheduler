@@ -26,6 +26,10 @@
     td.status_failed {
       color: red;
     }
+
+    td.status_aborted {
+      color: magenta;
+    }
   }
 
   .last_run {

@@ -15,12 +15,16 @@ class ScheduledTask < ActiveRecord::Base
     end
   end
 
-  validates :scheduling, presence: true, 'tasks_scheduler/cron_scheduling': true
-  validates :task, presence: true, inclusion: { in: rake_tasks }
-
   STATUS_RUNNING = 'running'
   STATUS_FAILED = 'failed'
   STATUS_WAITING = 'waiting'
+  STATUS_ABORTED = 'aborted'
+
+  LAST_FAIL_STATUSES = [STATUS_FAILED, STATUS_ABORTED]
+
+  validates :scheduling, presence: true, 'tasks_scheduler/cron_scheduling': true
+  validates :task, presence: true, inclusion: { in: rake_tasks }
+  validates :last_fail_status, allow_blank: true, inclusion: { in: LAST_FAIL_STATUSES }
 
   LOG_RUNNING = 'running'
   LOG_SUCCESSFUL = 'successful'

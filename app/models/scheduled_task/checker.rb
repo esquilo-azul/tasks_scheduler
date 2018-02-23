@@ -4,10 +4,25 @@ class ScheduledTask < ActiveRecord::Base
   module Checker
     def check
       check_banner
-      if process_running?
-        check_log("Already running (PID: #{pid})")
-        return
+      if pid.present?
+        check_on_pid_present
+      else
+        check_on_pid_not_present
       end
+    end
+
+    private
+
+    def check_on_pid_present
+      if process_running?
+        check_log('Already running')
+      else
+        check_log('Aborted')
+        on_end_running(Exception.new("Aborted (PID: #{pid} not found)"), STATUS_ABORTED)
+      end
+    end
+
+    def check_on_pid_not_present
       if next_run.present?
         check_task_with_next_run
       else
@@ -15,14 +30,15 @@ class ScheduledTask < ActiveRecord::Base
       end
     end
 
-    private
-
     def check_log(message, method = :info)
       Rails.logger.send(method, "TASK_CHECK(#{id}): #{message}")
     end
 
     def check_banner
       check_log("Task: #{self}")
+      check_log("PID: #{pid}")
+      check_log("Running? #{process_running?}")
+      check_log("Last fail status: #{last_fail_status}")
     end
 
     def check_task_without_next_run
@@ -48,7 +64,7 @@ class ScheduledTask < ActiveRecord::Base
         spawn_pid = Process.spawn(*params)
       end
       Process.detach(spawn_pid)
-      update_attributes!(pid: spawn_pid)
+      update_attributes!(pid: spawn_pid, last_fail_status: nil)
     end
   end
 end

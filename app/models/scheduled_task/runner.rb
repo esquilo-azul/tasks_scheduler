@@ -6,18 +6,26 @@ class ScheduledTask < ActiveRecord::Base
       return if process_running? && pid != Process.pid
       status_on_start
       exception = invoke_task
-      run_log(exception, :fatal) if exception
-      status_on_end(exception)
-      log_on_end(exception)
-      run_log("Next run: #{next_run.in_time_zone}")
+      on_end_running(exception, STATUS_FAILED)
     end
 
     private
 
+    def on_end_running(exception, last_fail_status)
+      run_log(exception, :fatal) if exception
+      status_on_end(exception, last_fail_status)
+      log_on_end(exception)
+      run_log("Next run: #{next_run.in_time_zone}")
+    end
+
     def run_log(message, method = :info)
       if message.is_a?(Exception)
         run_log("#{message.class}: #{message.message}")
-        run_log(message.backtrace.join("\n"))
+        if message.backtrace.present?
+          run_log(message.backtrace.join("\n"))
+        else
+          run_log('No backtrace present')
+        end
       else
         Rails.logger.send(method, "TASK_RUN(#{id}): #{message}")
       end
