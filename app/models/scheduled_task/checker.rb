@@ -44,7 +44,7 @@ class ScheduledTask < ActiveRecord::Base
     def check_task_without_next_run
       check_log('Next run blank')
       update_attributes!(next_run: calculate_next_run)
-      check_log("Next run @scheduled_taskored: #{next_run.in_time_zone}")
+      check_log("Next run scheduled: #{next_run.in_time_zone}")
     end
 
     def check_task_with_next_run
