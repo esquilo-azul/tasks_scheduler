@@ -51,6 +51,9 @@ class ScheduledTaskTest < ActiveSupport::TestCase
 
     @scheduled_task.send('status_on_end', StandardError.new('Test!'), ScheduledTask::STATUS_ABORTED)
     assert_equal ScheduledTask::STATUS_ABORTED, @scheduled_task.status
+
+    @scheduled_task.send('status_on_end', StandardError.new('Test!'), ScheduledTask::STATUS_TIMEOUT)
+    assert_equal ScheduledTask::STATUS_TIMEOUT, @scheduled_task.status
   end
 
   test 'task in list' do

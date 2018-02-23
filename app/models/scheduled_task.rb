@@ -6,11 +6,23 @@ class ScheduledTask < ActiveRecord::Base
   include ::ScheduledTask::Runner
   include ::ScheduledTask::Status
 
+  DEFAULT_TIMEOUT_ENVVAR_NAME = 'TASKS_SCHEDULER_TIMEOUT'.freeze
+  DEFAULT_TIMEOUT = 12.hours
+
   class << self
     def rake_tasks
       @rake_tasks ||= begin
         Rails.application.load_tasks
         Rake.application.tasks.map(&:name)
+      end
+    end
+
+    def timeout
+      @timeout ||= begin
+        r = Integer(ENV[DEFAULT_TIMEOUT_ENVVAR_NAME])
+        r > 0 ? r.seconds : DEFAULT_TIMEOUT
+      rescue ArgumentError, TypeError
+        DEFAULT_TIMEOUT
       end
     end
   end
@@ -19,8 +31,9 @@ class ScheduledTask < ActiveRecord::Base
   STATUS_FAILED = 'failed'
   STATUS_WAITING = 'waiting'
   STATUS_ABORTED = 'aborted'
+  STATUS_TIMEOUT = 'timeout'
 
-  LAST_FAIL_STATUSES = [STATUS_FAILED, STATUS_ABORTED]
+  LAST_FAIL_STATUSES = [STATUS_FAILED, STATUS_ABORTED, STATUS_TIMEOUT]
 
   validates :scheduling, presence: true, 'tasks_scheduler/cron_scheduling': true
   validates :task, presence: true, inclusion: { in: rake_tasks }

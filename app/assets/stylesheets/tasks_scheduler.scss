@@ -30,6 +30,10 @@
     td.status_aborted {
       color: magenta;
     }
+
+    td.status_timeout {
+      color: orange;
+    }
   }
 
   .last_run {
