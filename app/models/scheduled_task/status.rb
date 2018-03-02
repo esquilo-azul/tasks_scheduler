@@ -3,8 +3,7 @@ class ScheduledTask < ActiveRecord::Base
     def status
       return STATUS_RUNNING if running?
       return STATUS_WAITING if waiting?
-      return last_fail_status if last_fail_status.present?
-      raise "Unknown status (#{status_attributes_values})"
+      last_fail_status.present? ? last_fail_status : STATUS_FAILED
     end
 
     def running?

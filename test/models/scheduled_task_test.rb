@@ -56,6 +56,24 @@ class ScheduledTaskTest < ActiveSupport::TestCase
     assert_equal ScheduledTask::STATUS_TIMEOUT, @scheduled_task.status
   end
 
+  test 'status 1' do
+    @scheduled_task.update_attributes!(
+      scheduling: '*/5 * * * *',
+      next_run: 'Wed, 28 Feb 2018 15:35:00 UTC +00:00',
+      created_at: 'Tue, 06 Dec 2016 20:30:01 UTC +00:00',
+      updated_at: 'Wed, 28 Feb 2018 15:31:34 UTC +00:00',
+      last_run_start: nil,
+      last_run_successful_start: 'Wed, 28 Feb 2018 15:20:06 UTC +00:00',
+      last_run_successful_end: 'Wed, 28 Feb 2018 15:20:15 UTC +00:00',
+      last_run_unsuccessful_start: 'Wed, 28 Feb 2018 15:30:07 UTC +00:00',
+      last_run_unsuccessful_end: 'Wed, 28 Feb 2018 15:31:34 UTC +00:00',
+      pid: nil,
+      args: '1|1|1',
+      last_fail_status: nil
+    )
+    assert_equal ::ScheduledTask::STATUS_FAILED, @scheduled_task.status
+  end
+
   test 'task in list' do
     valid_invalid_column_values_test(
       @scheduled_task, :task, ['test', 'about', 'db:migrate'], [nil, '  ', '123notatask']
