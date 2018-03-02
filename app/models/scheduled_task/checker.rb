@@ -33,6 +33,7 @@ class ScheduledTask < ActiveRecord::Base
     end
 
     def check_on_pid_not_present
+      return unless enabled?
       if next_run.present?
         check_task_with_next_run
       else
@@ -49,6 +50,7 @@ class ScheduledTask < ActiveRecord::Base
       check_log("PID: #{pid}")
       check_log("Running? #{process_running?}")
       check_log("Last fail status: #{last_fail_status}")
+      check_log("Enabled: #{enabled?}")
     end
 
     def check_task_without_next_run
