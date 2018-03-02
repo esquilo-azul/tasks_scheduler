@@ -15,15 +15,20 @@ class ScheduledTask < ActiveRecord::Base
 
     def check_on_pid_present
       if process_running?
-        if timeout?
-          check_log('Timeout')
-          on_end_running(StandardError.new("Timeout (PID: #{pid}. running time: #{running_time})"), STATUS_TIMEOUT)
-        else
-          check_log('Already running')
-        end
+        check_on_process_running
       else
         check_log('Aborted')
         on_end_running(Exception.new("Aborted (PID: #{pid} not found)"), STATUS_ABORTED)
+      end
+    end
+
+    def check_on_process_running
+      if timeout?
+        check_log('Timeout')
+        on_end_running(StandardError.new("Timeout (PID: #{pid}. running time: #{running_time})"),
+                       STATUS_TIMEOUT)
+      else
+        check_log('Already running')
       end
     end
 
