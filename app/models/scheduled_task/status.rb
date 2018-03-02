@@ -1,6 +1,7 @@
 class ScheduledTask < ActiveRecord::Base
   module Status
     def status
+      return STATUS_DISABLED unless enabled?
       return STATUS_RUNNING if running?
       return STATUS_WAITING if waiting?
       last_fail_status.present? ? last_fail_status : STATUS_FAILED

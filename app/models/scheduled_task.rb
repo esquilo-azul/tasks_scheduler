@@ -32,6 +32,7 @@ class ScheduledTask < ActiveRecord::Base
   STATUS_WAITING = 'waiting'
   STATUS_ABORTED = 'aborted'
   STATUS_TIMEOUT = 'timeout'
+  STATUS_DISABLED = 'disabled'
 
   LAST_FAIL_STATUSES = [STATUS_FAILED, STATUS_ABORTED, STATUS_TIMEOUT]
 

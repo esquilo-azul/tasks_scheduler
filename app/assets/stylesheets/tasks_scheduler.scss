@@ -34,6 +34,10 @@
     td.status_timeout {
       color: orange;
     }
+
+    td.status_disabled {
+      color: lightgrey;
+    }
   }
 
   .last_run {
