@@ -1,3 +1,5 @@
 = TasksScheduler
 
+{<img src="https://travis-ci.org/eduardobogoni/tasks_scheduler.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/eduardobogoni/tasks_scheduler]
+
 This project rocks and uses MIT-LICENSE.
