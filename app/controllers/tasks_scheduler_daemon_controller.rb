@@ -7,7 +7,7 @@ class TasksSchedulerDaemonController < ApplicationController
     render 'index'
   end
 
-  def running
+  def status
     render plain: (::TasksScheduler::Daemon.running? ? 'true' : 'false'), layout: false
   end
 
