@@ -1,0 +1,4 @@
+<% if can_by_path?(main_app.tasks_scheduler_daemon_path) &&
+    can_by_path?(main_app.status_tasks_scheduler_daemon_path) %>
+<%= render partial: '/tasks_scheduler/alert' %>
+<% end %>

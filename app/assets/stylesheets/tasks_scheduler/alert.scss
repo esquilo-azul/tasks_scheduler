@@ -1,0 +1,8 @@
+#tasks_scheduler_alert {
+  color: red !important;
+  font-weight: bold;
+  content: '!';
+  &::after {
+    content: '!';
+  }
+}
