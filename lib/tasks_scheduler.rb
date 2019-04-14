@@ -1,5 +1,6 @@
 require 'tasks_scheduler/engine'
 require 'active_scaffold'
+require 'js-routes'
 require 'parse-cron'
 require 'tasks_scheduler/cron_scheduling_validator'
 require 'tasks_scheduler/cron_parser_patch'

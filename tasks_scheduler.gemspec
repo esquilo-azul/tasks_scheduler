@@ -19,6 +19,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'active_scaffold'
   s.add_dependency 'daemons'
+  s.add_dependency 'js-routes'
   s.add_dependency 'parse-cron'
   s.add_dependency 'rails', '~> 4.2.1'
 
