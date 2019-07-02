@@ -14,6 +14,8 @@ rails_root = find_rails_root
 dir = File.expand_path('tmp/pids', rails_root)
 FileUtils.mkdir_p(dir)
 Daemons.run_proc 'tasks_scheduler', dir_mode: :normal, dir: dir do
-  require File.join(rails_root, 'config', 'environment')
-  ::TasksScheduler::Checker.instance.run
+  ::Dir.chdir(rails_root) do
+    require File.join(rails_root, 'config', 'environment')
+    ::TasksScheduler::Checker.instance.run
+  end
 end
