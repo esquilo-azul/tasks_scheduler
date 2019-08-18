@@ -1,0 +1,11 @@
+<h3>Daemon</h3>
+<p>
+  <strong>Status: </strong>
+  <%= render partial: '/tasks_scheduler_daemon/running_status' %>
+  <br/>
+  <strong>Actions: </strong>
+  <%= safe_join(::TasksScheduler::Daemon::ACTIONS.map do |action|
+      link_to action, execute_tasks_scheduler_daemon_path(action), method: :post
+      end, ' | ') %>
+  <br/>
+</p>

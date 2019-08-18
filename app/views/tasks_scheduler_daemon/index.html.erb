@@ -1,22 +1,5 @@
 <%= render partial: '/tasks_scheduler/navbar' %>
 <h2><%= I18n.t(:tasks_scheduler_daemon) %></h2>
-<p>
-  <%= render partial: '/tasks_scheduler_daemon/running_status' %>
-  <br/>
-  <strong>Actions: </strong>
-  <%= safe_join(::TasksScheduler::Daemon::ACTIONS.map do |action|
-      link_to action, execute_tasks_scheduler_daemon_path(action), method: :post
-    end, ' | ') %>
-  <br/>
-  <strong>Log: </strong>
-  <%= link_to 'download', download_log_tasks_scheduler_daemon_path %>
-</p>
-<% if @result %>
-  <h3>Results</h3>
-  <dl>
-    <% @result.each do |k, v| %>
-      <dt><%= k %></dt>
-      <dd><%= v.present? ? v : '-' %></dd>
-    <% end %>
-  </dl>
-<% end %>
+<%= render partial: 'daemon', locals: {status_label: 'Status:'} %>
+<%= render partial: 'logs' %>
+<%= render partial: 'results' %>
