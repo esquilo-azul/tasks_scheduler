@@ -6,7 +6,7 @@ module TasksScheduler
 
     CHECK_INTERVAL = 15
     LOG_ON_FILE_ENV_KEY = 'TASKS_SCHEDULER_LOG_ON_FILE'.freeze
-    LOGS_KEYS = %w(rails).freeze
+    LOGS_KEYS = %w(rails stdout stderr).freeze
 
     def run
       check_log
@@ -41,6 +41,8 @@ CODE
     def check_log
       return unless log_on_file?
       ::Rails.logger = ::Logger.new(rails_log.path)
+      $stdout.reopen(stdout_log.path, 'w')
+      $stderr.reopen(stderr_log.path, 'w')
     end
 
     def log_on_file?
