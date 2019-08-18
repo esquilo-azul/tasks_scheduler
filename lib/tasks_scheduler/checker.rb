@@ -1,9 +1,12 @@
+require 'tasks_scheduler/checker/log'
+
 module TasksScheduler
   class Checker
     include Singleton
 
     CHECK_INTERVAL = 15
     LOG_ON_FILE_ENV_KEY = 'TASKS_SCHEDULER_LOG_ON_FILE'.freeze
+    LOGS_KEYS = %w(rails).freeze
 
     def run
       check_log
@@ -18,15 +21,26 @@ module TasksScheduler
     end
 
     def log_path
-      ::Rails.root.join('log', 'tasks_scheduler', 'checker.log')
+      rais_log.path
+    end
+
+    def logs
+      LOGS_KEYS.map { |key| send("#{key}_log") }
+    end
+
+    LOGS_KEYS.each do |log_key|
+      class_eval <<CODE, __FILE__, __LINE__ + 1
+      def #{log_key}_log
+        @#{log_key}_log ||= ::TasksScheduler::Checker::Log.new('#{log_key}')
+      end
+CODE
     end
 
     private
 
     def check_log
       return unless log_on_file?
-      ::FileUtils.mkdir_p(File.dirname(log_path))
-      ::Rails.logger = ::Logger.new(log_path)
+      ::Rails.logger = ::Logger.new(rails_log.path)
     end
 
     def log_on_file?
