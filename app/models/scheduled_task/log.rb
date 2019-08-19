@@ -23,9 +23,12 @@ class ScheduledTask < ActiveRecord::Base
     end
 
     def log_on_end(exception)
-      target_log = exception ? log_file(LOG_UNSUCCESSFUL) : log_file(LOG_SUCCESSFUL)
-      File.unlink(target_log) if File.exist?(target_log)
-      File.rename(log_file(LOG_RUNNING), target_log)
+      running_log = log_file(LOG_RUNNING)
+      if ::File.exist?(running_log)
+        target_log = exception ? log_file(LOG_UNSUCCESSFUL) : log_file(LOG_SUCCESSFUL)
+        File.unlink(target_log) if File.exist?(target_log)
+        File.rename(running_log, target_log)
+      end
     end
   end
 end
