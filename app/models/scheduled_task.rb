@@ -37,8 +37,10 @@ class ScheduledTask < ActiveRecord::Base
   LAST_FAIL_STATUSES = [STATUS_FAILED, STATUS_ABORTED, STATUS_TIMEOUT]
 
   validates :scheduling, presence: true, 'tasks_scheduler/cron_scheduling': true
-  validates :task, presence: true, inclusion: { in: rake_tasks }
+  validates :task, presence: true
   validates :last_fail_status, allow_blank: true, inclusion: { in: LAST_FAIL_STATUSES }
+
+  validate :validate_task
 
   LOG_RUNNING = 'running'
   LOG_SUCCESSFUL = 'successful'
@@ -79,5 +81,12 @@ class ScheduledTask < ActiveRecord::Base
 
   def task_exist?
     self.class.rake_tasks.include?(task)
+  end
+
+  def validate_task
+    return if task.blank?
+    return unless task_changed?
+    return if self.class.rake_tasks.include?(task)
+    errors.add(:task, "Task \"#{task}\" not found")
   end
 end
