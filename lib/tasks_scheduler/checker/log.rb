@@ -20,6 +20,10 @@ module TasksScheduler
         ::File.dirname(path)
       end
 
+      def exist?
+        ::File.exist?(path)
+      end
+
       def path
         self.class.logs_directory.join("#{key}.log")
       end

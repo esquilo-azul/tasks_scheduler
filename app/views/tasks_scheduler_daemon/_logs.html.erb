@@ -1,2 +1,12 @@
 <h3>Logs</h3>
-<%= link_to 'download', download_log_tasks_scheduler_daemon_path %>
+<ul>
+  <% ::TasksScheduler::Checker.instance.logs.each do |log| %>
+    <li>
+      <% if log.exist? %>
+        <%= link_to log.key, download_log_tasks_scheduler_daemon_path(log.key) %>
+      <% else %>
+        <span style="color: grey" title='Log "<%= log.key %>" does not exist.'><%= log.key %></span>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

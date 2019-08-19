@@ -1,3 +1,5 @@
+require 'tasks_scheduler/checker'
+
 class TasksSchedulerDaemonController < ApplicationController
   require_relative 'tasks_scheduler_daemon_controller/_download_log'
 
