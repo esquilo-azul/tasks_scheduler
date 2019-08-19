@@ -72,7 +72,7 @@ class ScheduledTask < ActiveRecord::Base
 
     def spawn_task
       params = ['bundle', 'exec', 'tasks_scheduler_run_task', id.to_s]
-      check_log("Spawn command: #{params}")
+      check_log("Spawn command: #{params} (Task: #{task})")
       spawn_pid = nil
       Dir.chdir(Rails.root) do
         spawn_pid = Process.spawn(*params)
