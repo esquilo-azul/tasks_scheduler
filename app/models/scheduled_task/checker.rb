@@ -60,7 +60,9 @@ class ScheduledTask < ActiveRecord::Base
     end
 
     def check_task_with_next_run
-      if next_run < Time.zone.now
+      if !task_exist?
+        check_log("Task does not exist: #{task}")
+      elsif next_run < Time.zone.now
         check_log('Next run reached. Running...')
         spawn_task
       else

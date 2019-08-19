@@ -76,4 +76,8 @@ class ScheduledTask < ActiveRecord::Base
   rescue
     raise "Unable to determine status for #{pid}"
   end
+
+  def task_exist?
+    self.class.rake_tasks.include?(task)
+  end
 end
