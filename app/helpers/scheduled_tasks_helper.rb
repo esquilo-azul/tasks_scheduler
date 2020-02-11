@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ScheduledTasksHelper
   def scheduled_tasks_status_time(time)
     if time.present?

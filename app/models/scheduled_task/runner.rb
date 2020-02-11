@@ -1,9 +1,12 @@
+# frozen_string_literal: true
+
 class ScheduledTask < ActiveRecord::Base
   module Runner
     def run
       log_on_start
       run_banner
       return if process_running? && pid != Process.pid
+
       status_on_start
       exception = invoke_task
       on_end_running(exception, STATUS_FAILED)
@@ -33,7 +36,7 @@ class ScheduledTask < ActiveRecord::Base
 
     def run_banner
       run_log("Task: #{self}")
-      run_log("PID: #{pid ? pid : '-'} (Current: #{Process.pid})")
+      run_log("PID: #{pid || '-'} (Current: #{Process.pid})")
       run_log("Process running? #{process_running? ? 'Yes' : 'No'}")
       run_log("Rails.env: #{Rails.env}")
     end
@@ -44,15 +47,16 @@ class ScheduledTask < ActiveRecord::Base
         Rake::Task.clear
         Rails.application.load_tasks
         Rake::Task[task].invoke(*invoke_args)
-      rescue StandardError => ex
-        run_log(ex, :fatal)
-        exception = ex
+      rescue StandardError => e
+        run_log(e, :fatal)
+        exception = e
       end
       exception
     end
 
     def invoke_args
-      return [] unless args.present?
+      return [] if args.blank?
+
       args.split('|')
     end
   end

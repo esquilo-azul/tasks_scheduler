@@ -1,12 +1,15 @@
+# frozen_string_literal: true
+
 require 'open3'
 
 module TasksScheduler
   class Daemon
-    ACTIONS = %w(status start stop restart).freeze
+    ACTIONS = %w[status start stop restart].freeze
 
     class << self
       def execute(action)
         raise "Action not allowed: #{action} (Allowed: #{ACTIONS})" unless ACTIONS.include?(action)
+
         command = ['bundle', 'exec', 'tasks_scheduler', action]
         Dir.chdir(Rails.root) do
           Open3.popen3(env_args, *command) do |_stdin, stdout, stderr, wait_thr|

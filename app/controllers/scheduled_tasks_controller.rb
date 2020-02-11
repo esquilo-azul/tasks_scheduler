@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ScheduledTasksController < ApplicationController
   class << self
     private
@@ -8,7 +10,7 @@ class ScheduledTasksController < ApplicationController
   end
 
   active_scaffold :scheduled_task do |conf|
-    [:create, :update, :list].each do |action|
+    %i[create update list].each do |action|
       conf.send(action).columns.exclude(:next_run, :last_fail_status, :last_run_start,
                                         :last_run_successful_start, :last_run_unsuccessful_start,
                                         :last_run_successful_end, :last_run_unsuccessful_end,
@@ -26,8 +28,7 @@ class ScheduledTasksController < ApplicationController
     @log_file = record.log_file(params[:identifier])
   end
 
-  def status
-  end
+  def status; end
 
   def status_content
     @scheduled_tasks = ::ScheduledTask.order(task: :asc, scheduling: :asc)
@@ -36,7 +37,7 @@ class ScheduledTasksController < ApplicationController
 
   def run_now
     process_action_link_action do |record|
-      record.update_attributes!(next_run: Time.zone.now)
+      record.update!(next_run: Time.zone.now)
       record.reload
       flash[:info] = "Next run adjusted to #{record.next_run}"
     end

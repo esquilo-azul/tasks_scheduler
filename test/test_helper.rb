@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 # Configure Rails Environment
 ENV['RAILS_ENV'] = 'test'
 
-require File.expand_path('../../test/dummy/config/environment.rb', __FILE__)
+require File.expand_path('../test/dummy/config/environment.rb', __dir__)
 ActiveRecord::Migrator.migrations_paths = [
-  File.expand_path('../../test/dummy/db/migrate', __FILE__)
+  File.expand_path('../test/dummy/db/migrate', __dir__)
 ]
 require 'rails/test_help'
 
@@ -12,11 +14,11 @@ require 'rails/test_help'
 Minitest.backtrace_filter = Minitest::BacktraceFilter.new
 
 # Load support files
-Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
+Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].sort.each { |f| require f }
 
 # Load fixtures from the engine
 if ActiveSupport::TestCase.respond_to?(:fixture_path=)
-  ActiveSupport::TestCase.fixture_path = File.expand_path('../fixtures', __FILE__)
+  ActiveSupport::TestCase.fixture_path = File.expand_path('fixtures', __dir__)
   ActiveSupport::TestCase.fixtures :all
 end
 

@@ -1,12 +1,14 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
 require 'rubygems'
 require 'daemons'
 require 'fileutils'
 
 def find_rails_root(dir = Dir.pwd)
-  fail 'Rails root not found' if dir == '' || dir == '/' || dir == '.'
+  raise 'Rails root not found' if ['', '/', '.'].include?(dir)
   return dir if File.exist?(File.expand_path('config/environment.rb', dir))
+
   rails_root(File.dirname(dir))
 end
 

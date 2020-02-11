@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class ScheduledTaskTest < ActiveSupport::TestCase
@@ -6,9 +8,9 @@ class ScheduledTaskTest < ActiveSupport::TestCase
     '*/5 * * * *' => Time.utc(2016, 12, 22, 12, 5, 0, 0),
     '* * 1 * *' => Time.utc(2017, 1, 1, 0, 0, 0, 0),
     '* * * * *' => Time.utc(2016, 12, 22, 12, 1, 0, 0)
-  }
+  }.freeze
 
-  SCHEDULING_INVALID_VALUES = ['  ', nil, '1', 'abc123', 456]
+  SCHEDULING_INVALID_VALUES = ['  ', nil, '1', 'abc123', 456].freeze
 
   setup do
     @scheduled_task = scheduled_tasks(:test_scheduling)
@@ -57,7 +59,7 @@ class ScheduledTaskTest < ActiveSupport::TestCase
   end
 
   test 'status 1' do
-    @scheduled_task.update_attributes!(
+    @scheduled_task.update!(
       scheduling: '*/5 * * * *',
       next_run: 'Wed, 28 Feb 2018 15:35:00 UTC +00:00',
       created_at: 'Tue, 06 Dec 2016 20:30:01 UTC +00:00',
@@ -88,7 +90,7 @@ class ScheduledTaskTest < ActiveSupport::TestCase
     assert_equal ['abc'], @scheduled_task.send('invoke_args')
 
     @scheduled_task.args = 'abc|def|ghi'
-    assert_equal %w(abc def ghi), @scheduled_task.send('invoke_args')
+    assert_equal %w[abc def ghi], @scheduled_task.send('invoke_args')
 
     @scheduled_task.args = 'abc||ghi'
     assert_equal ['abc', '', 'ghi'], @scheduled_task.send('invoke_args')

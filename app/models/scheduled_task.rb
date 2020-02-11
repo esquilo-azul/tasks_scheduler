@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rake'
 
 class ScheduledTask < ActiveRecord::Base
@@ -6,7 +8,7 @@ class ScheduledTask < ActiveRecord::Base
   include ::ScheduledTask::Runner
   include ::ScheduledTask::Status
 
-  DEFAULT_TIMEOUT_ENVVAR_NAME = 'TASKS_SCHEDULER_TIMEOUT'.freeze
+  DEFAULT_TIMEOUT_ENVVAR_NAME = 'TASKS_SCHEDULER_TIMEOUT'
   DEFAULT_TIMEOUT = 12.hours
 
   class << self
@@ -20,9 +22,9 @@ class ScheduledTask < ActiveRecord::Base
     def timeout
       @timeout ||= begin
         r = Integer(ENV[DEFAULT_TIMEOUT_ENVVAR_NAME])
-        r > 0 ? r.seconds : DEFAULT_TIMEOUT
-      rescue ArgumentError, TypeError
-        DEFAULT_TIMEOUT
+        r.positive? ? r.seconds : DEFAULT_TIMEOUT
+                   rescue ArgumentError, TypeError
+                     DEFAULT_TIMEOUT
       end
     end
   end
@@ -34,7 +36,7 @@ class ScheduledTask < ActiveRecord::Base
   STATUS_TIMEOUT = 'timeout'
   STATUS_DISABLED = 'disabled'
 
-  LAST_FAIL_STATUSES = [STATUS_FAILED, STATUS_ABORTED, STATUS_TIMEOUT]
+  LAST_FAIL_STATUSES = [STATUS_FAILED, STATUS_ABORTED, STATUS_TIMEOUT].freeze
 
   validates :scheduling, presence: true, 'tasks_scheduler/cron_scheduling': true
   validates :task, presence: true
@@ -69,13 +71,14 @@ class ScheduledTask < ActiveRecord::Base
 
   def process_running?
     return false if pid.nil?
+
     Process.kill(0, pid)
-    return true
+    true
   rescue Errno::EPERM
     raise "No permission to query #{pid}!"
   rescue Errno::ESRCH
-    return false
-  rescue
+    false
+  rescue StandardError
     raise "Unable to determine status for #{pid}"
   end
 
@@ -87,6 +90,7 @@ class ScheduledTask < ActiveRecord::Base
     return if task.blank?
     return unless task_changed?
     return if self.class.rake_tasks.include?(task)
+
     errors.add(:task, "Task \"#{task}\" not found")
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateScheduledTasks < ActiveRecord::Migration
   def change
     create_table :scheduled_tasks do |t|

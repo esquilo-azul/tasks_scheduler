@@ -1,10 +1,13 @@
+# frozen_string_literal: true
+
 class ScheduledTask < ActiveRecord::Base
   module Status
     def status
       return STATUS_DISABLED unless enabled?
       return STATUS_RUNNING if running?
       return STATUS_WAITING if waiting?
-      last_fail_status.present? ? last_fail_status : STATUS_FAILED
+
+      last_fail_status.presence || STATUS_FAILED
     end
 
     def failed?
@@ -17,6 +20,7 @@ class ScheduledTask < ActiveRecord::Base
 
     def waiting?
       return true if ended?(last_run_successful_end, last_run_unsuccessful_end)
+
       status_attributes.all? { |a| send(a).blank? }
     end
 
@@ -27,11 +31,11 @@ class ScheduledTask < ActiveRecord::Base
     end
 
     def status_on_start
-      update_attributes!(last_run_start: Time.zone.now)
+      update!(last_run_start: Time.zone.now)
     end
 
     def status_on_end(exception, last_fail_status)
-      update_attributes!(
+      update!(
         next_run: calculate_next_run,
         (exception ? :last_run_unsuccessful_start : :last_run_successful_start) => last_run_start,
         (exception ? :last_run_unsuccessful_end : :last_run_successful_end) => Time.zone.now,
@@ -42,7 +46,7 @@ class ScheduledTask < ActiveRecord::Base
     end
 
     def status_attributes
-      %w(start successful_start successful_end unsuccessful_start unsuccessful_end).map do |a|
+      %w[start successful_start successful_end unsuccessful_start unsuccessful_end].map do |a|
         "last_run_#{a}"
       end
     end

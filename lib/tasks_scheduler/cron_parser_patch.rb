@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 module TasksScheduler
   module CronParserPatch
     class TasksSchedulerTimeSource
       class << self
-        def local(year, month, day, hour, min, second)
+        def local(year, month, day, hour, min, second) # rubocop:disable Metrics/ParameterLists
           Time.utc(year, month, day, hour, min, second)
         end
 

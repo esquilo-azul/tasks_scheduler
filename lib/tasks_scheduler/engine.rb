@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module TasksScheduler
   class Engine < ::Rails::Engine
     initializer :append_migrations do |app|

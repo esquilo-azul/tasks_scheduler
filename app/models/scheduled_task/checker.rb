@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rake'
 
 class ScheduledTask < ActiveRecord::Base
@@ -34,6 +36,7 @@ class ScheduledTask < ActiveRecord::Base
 
     def check_on_pid_not_present
       return unless enabled?
+
       if next_run.present?
         check_task_with_next_run
       else
@@ -55,7 +58,7 @@ class ScheduledTask < ActiveRecord::Base
 
     def check_task_without_next_run
       check_log('Next run blank')
-      update_attributes!(next_run: calculate_next_run)
+      update!(next_run: calculate_next_run)
       check_log("Next run scheduled: #{next_run.in_time_zone}")
     end
 
@@ -78,7 +81,7 @@ class ScheduledTask < ActiveRecord::Base
         spawn_pid = Process.spawn(*params)
       end
       Process.detach(spawn_pid)
-      update_attributes!(pid: spawn_pid, last_fail_status: nil)
+      update!(pid: spawn_pid, last_fail_status: nil)
     end
 
     def timeout?

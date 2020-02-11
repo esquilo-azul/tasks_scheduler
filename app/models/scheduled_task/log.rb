@@ -1,9 +1,12 @@
+# frozen_string_literal: true
+
 class ScheduledTask < ActiveRecord::Base
   module Log
     def log_file(identifier)
       unless log_identifiers.include?(identifier)
-        fail "Log identifier unknown: \"#{identifier}\" (Valid: #{log_identifiers})"
+        raise "Log identifier unknown: \"#{identifier}\" (Valid: #{log_identifiers})"
       end
+
       Rails.root.join('log', 'tasks_scheduler', "#{id}_#{identifier}.log")
     end
 
@@ -24,11 +27,11 @@ class ScheduledTask < ActiveRecord::Base
 
     def log_on_end(exception)
       running_log = log_file(LOG_RUNNING)
-      if ::File.exist?(running_log)
-        target_log = exception ? log_file(LOG_UNSUCCESSFUL) : log_file(LOG_SUCCESSFUL)
-        File.unlink(target_log) if File.exist?(target_log)
-        File.rename(running_log, target_log)
-      end
+      return unless ::File.exist?(running_log)
+
+      target_log = exception ? log_file(LOG_UNSUCCESSFUL) : log_file(LOG_SUCCESSFUL)
+      File.unlink(target_log) if File.exist?(target_log)
+      File.rename(running_log, target_log)
     end
   end
 end

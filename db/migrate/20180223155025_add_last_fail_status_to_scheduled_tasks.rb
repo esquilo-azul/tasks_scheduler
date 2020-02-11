@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddLastFailStatusToScheduledTasks < ActiveRecord::Migration
   def change
     add_column :scheduled_tasks, :last_fail_status, :string

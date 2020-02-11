@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddStatusAttributesToScheduledTasks < ActiveRecord::Migration
   def change
     add_column :scheduled_tasks, :last_run_start, :datetime
