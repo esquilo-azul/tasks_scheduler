@@ -1,31 +1,29 @@
-AllCops:
-  Exclude:
-    - test/dummy/db/schema.rb
+require:
+  - rubocop-rails
 
-Rails:
-  Enabled: true
+AllCops:
+  TargetRubyVersion: 2.4
+  Exclude:
+    - '**/*/db/schema.rb'
+
+Layout/LineLength:
+  Max: 100
+
+Metrics/AbcSize:
+  Exclude:
+    - '**/db/migrate/*'
+
+Metrics/BlockLength:
+  Exclude:
+    - '**/*.gemspec'
+    - 'spec/**/*_spec.rb'
+
+Metrics/MethodLength:
+  Exclude:
+    - '**/db/migrate/*'
 
 Style/Documentation:
   Enabled: false
 
 Style/AsciiComments:
   Enabled: false
-
-Metrics/AbcSize:
-  Exclude:
-    - 'db/migrate/**/*'
-    - 'test/**/*'
-
-Metrics/LineLength:
-  Max: 100
-  Exclude:
-    - 'db/migrate/**/*'
-
-Metrics/MethodLength:
-  Exclude:
-    - 'db/migrate/**/*'
-    - 'test/**/*'
-
-Metrics/ParameterLists:
-  Exclude:
-    - lib/tasks_scheduler/cron_parser_patch.rb
