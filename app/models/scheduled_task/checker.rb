@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'rake'
+require 'eac_ruby_utils/ruby'
 
 class ScheduledTask < ActiveRecord::Base
   module Checker
@@ -77,8 +78,10 @@ class ScheduledTask < ActiveRecord::Base
       params = ['bundle', 'exec', 'tasks_scheduler_run_task', id.to_s]
       check_log("Spawn command: #{params} (Task: #{task})")
       spawn_pid = nil
-      Dir.chdir(Rails.root) do
-        spawn_pid = Process.spawn(*params)
+      ::EacRubyUtils::Ruby.on_clean_environment do
+        Dir.chdir(Rails.root) do
+          spawn_pid = ::Process.spawn(*params)
+        end
       end
       Process.detach(spawn_pid)
       update!(pid: spawn_pid, last_fail_status: nil)
