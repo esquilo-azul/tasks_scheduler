@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'parse-cron'
+
 module TasksScheduler
   module CronParserPatch
     class TasksSchedulerTimeSource
