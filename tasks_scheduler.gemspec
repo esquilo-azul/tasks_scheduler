@@ -12,6 +12,7 @@ Gem::Specification.new do |s|
   s.authors     = ['Eduardo H. Bogoni']
   s.email       = ['eduardobogoni@gmail.com']
   s.summary     = 'Scheduler for Rake tasks.'
+  s.homepage    = 'https://github.com/esquilo-azul/tasks_scheduler'
   s.license     = 'MIT'
 
   s.files = Dir['{app,config,db,lib,exe}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.rdoc']
