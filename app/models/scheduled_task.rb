@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'eac_ruby_utils/core_ext'
 require 'rake'
 
 class ScheduledTask < ActiveRecord::Base
@@ -29,12 +30,8 @@ class ScheduledTask < ActiveRecord::Base
     end
   end
 
-  STATUS_RUNNING = 'running'
-  STATUS_FAILED = 'failed'
-  STATUS_WAITING = 'waiting'
-  STATUS_ABORTED = 'aborted'
-  STATUS_TIMEOUT = 'timeout'
-  STATUS_DISABLED = 'disabled'
+  enable_listable
+  lists.add_string :status, 'aborted', 'disabled', 'failed', 'running', 'timeout', 'waiting'
 
   LAST_FAIL_STATUSES = [STATUS_FAILED, STATUS_ABORTED, STATUS_TIMEOUT].freeze
 
