@@ -31,9 +31,10 @@ class ScheduledTask < ActiveRecord::Base
   end
 
   enable_listable
-  lists.add_string :status, 'aborted', 'disabled', 'failed', 'running', 'timeout', 'waiting'
+  lists.add_string :status, 'aborted', 'disabled', 'failed', 'running', 'task_not_found', 'timeout',
+                   'waiting'
 
-  LAST_FAIL_STATUSES = [STATUS_FAILED, STATUS_ABORTED, STATUS_TIMEOUT].freeze
+  LAST_FAIL_STATUSES = [STATUS_FAILED, STATUS_ABORTED, STATUS_TASK_NOT_FOUND, STATUS_TIMEOUT].freeze
 
   validates :scheduling, presence: true, 'tasks_scheduler/cron_scheduling': true
   validates :task, presence: true
