@@ -46,7 +46,9 @@ class ScheduledTask < ActiveRecord::Base
     end
 
     def check_on_task_not_exist
-      check_log("Task does not exist: #{task}")
+      message = "Task does not exist: #{task}"
+      check_log(message)
+      on_end_running(::StandardError.new(message), STATUS_TASK_NOT_FOUND)
     end
 
     def check_log(message, method = :info)
