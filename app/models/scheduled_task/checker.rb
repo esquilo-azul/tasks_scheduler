@@ -45,6 +45,10 @@ class ScheduledTask < ActiveRecord::Base
       end
     end
 
+    def check_on_task_not_exist
+      check_log("Task does not exist: #{task}")
+    end
+
     def check_log(message, method = :info)
       Rails.logger.send(method, "TASK_CHECK(#{id}): #{message}")
     end
@@ -65,7 +69,7 @@ class ScheduledTask < ActiveRecord::Base
 
     def check_task_with_next_run
       if !task_exist?
-        check_log("Task does not exist: #{task}")
+        check_on_task_not_exist
       elsif next_run < Time.zone.now
         check_log('Next run reached. Running...')
         spawn_task
