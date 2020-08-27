@@ -27,7 +27,11 @@ _A.setNextRefresh = function () {
 };
 
 _A.refresh = function () {
-  $.ajax({
+  $.ajax(_A.refreshAjaxData());
+};
+
+_A.refreshAjaxData = function () {
+  return {
     url: _A.url,
     success: function (result) {
       var alert = $(_A.options.element_selector);
@@ -40,7 +44,7 @@ _A.refresh = function () {
     complete: function (result) {
       _A.setNextRefresh();
     }
-  });
+  };
 };
 
 _A.resultToCssClass = function(result) {
