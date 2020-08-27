@@ -40,7 +40,11 @@ _S.check = function () {
 };
 
 _S.update = function () {
-  $.ajax({
+  $.ajax(_S.updateAjaxData());
+};
+
+_S.updateAjaxData = function() {
+  return {
     url: _S.url,
     success: function (result) {
       _S.content().html(result);
@@ -50,5 +54,5 @@ _S.update = function () {
       _S.last_update = new Date();
       _S.check();
     }
-  });
+  };
 };
