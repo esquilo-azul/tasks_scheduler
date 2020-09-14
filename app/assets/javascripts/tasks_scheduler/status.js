@@ -1,3 +1,7 @@
+if (typeof TasksScheduler == "undefined") {
+  TasksScheduler = function() {};
+}
+
 TasksScheduler.Status = function () {
 };
 
