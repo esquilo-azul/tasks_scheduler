@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources(:scheduled_tasks) do
-    as_routes
+  concern :active_scaffold, ActiveScaffold::Routing::Basic.new(association: true)
+  resources(:scheduled_tasks, concerns: :active_scaffold) do
     collection do
       get :status
       get :status_content
