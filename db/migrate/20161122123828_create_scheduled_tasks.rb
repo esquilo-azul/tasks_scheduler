@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CreateScheduledTasks < (
-    Rails.version < '5.2' ? ActiveRecord::Migration : ActiveRecord::Migration[4.2]
+    Rails.version < '5' ? ActiveRecord::Migration : ActiveRecord::Migration[4.2]
   )
   def change
     create_table :scheduled_tasks do |t|
