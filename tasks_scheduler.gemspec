@@ -26,7 +26,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'eac_ruby_utils', '~> 0.43'
   s.add_dependency 'js-routes'
   s.add_dependency 'parse-cron'
-  s.add_dependency 'rails', '>= 4.2.11.3'
+  s.add_dependency 'rails', '>= 4.2.11'
 
   s.add_development_dependency 'eac_ruby_gem_support', '~> 0.1', '>= 0.1.1'
   s.add_development_dependency 'sqlite3', '~> 1.3.13'
