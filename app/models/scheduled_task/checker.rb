@@ -61,6 +61,8 @@ class ScheduledTask < ActiveRecord::Base
       check_log("Running? #{process_running?}")
       check_log("Last fail status: #{last_fail_status}")
       check_log("Enabled: #{enabled?}")
+      check_log("Tasks running: #{::TasksScheduler::Info.tasks_running_current}/" +
+        ::TasksScheduler::Info.tasks_running_limit.to_s)
     end
 
     def check_task_without_next_run
@@ -72,11 +74,13 @@ class ScheduledTask < ActiveRecord::Base
     def check_task_with_next_run
       if !task_exist?
         check_on_task_not_exist
-      elsif next_run < Time.zone.now
+      elsif next_run >= Time.zone.now
+        check_log('Next run not reached')
+      elsif !::TasksScheduler::Info.can_run_new_task?
+        check_log('Running tasks limit reached. Waiting...')
+      else
         check_log('Next run reached. Running...')
         spawn_task
-      else
-        check_log('Next run not reached')
       end
     end
 
