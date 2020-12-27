@@ -23,7 +23,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'active_scaffold'
   s.add_dependency 'daemons'
   s.add_dependency 'eac_ruby_gems_utils', '~> 0.4', '>= 0.4.1'
-  s.add_dependency 'eac_ruby_utils', '~> 0.43'
+  s.add_dependency 'eac_ruby_utils', '~> 0.56', '>= 0.56.1'
   s.add_dependency 'js-routes'
   s.add_dependency 'parse-cron'
   s.add_dependency 'rails', '>= 4.2.11'
