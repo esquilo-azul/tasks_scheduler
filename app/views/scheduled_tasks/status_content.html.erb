@@ -4,6 +4,10 @@
   <br/>
   <strong>Daemon status: </strong>
   <%= render partial: '/tasks_scheduler_daemon/running_status' %>
+  <br/>
+  <strong>Tasks running/limit: </strong>
+  <%= ::TasksScheduler::Info.tasks_running_current %> /
+  <%= ::TasksScheduler::Info.tasks_running_limit %>
 </p>
 <table>
   <thead>
