@@ -97,4 +97,7 @@ RSpec.configure do |config|
   #   # test failures related to randomization by passing the same `--seed` value
   #   # as the one that triggered the failure.
   #   Kernel.srand config.seed
+
+  require 'eac_ruby_gem_support/rspec'
+  ::EacRubyGemSupport::Rspec.setup(::File.expand_path('..', __dir__), config)
 end

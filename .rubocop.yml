@@ -23,6 +23,9 @@ Metrics/MethodLength:
   Exclude:
     - '**/db/migrate/*'
 
+Rails/ApplicationRecord:
+  Enabled: false
+
 Style/Documentation:
   Enabled: false
 
