@@ -15,4 +15,5 @@ gemspec
 # To use a debugger
 # gem 'byebug', group: [:development, :test]
 
+gem 'bigdecimal', '< 2'
 gem 'rails', '~> 4.2.1'
