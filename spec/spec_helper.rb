@@ -33,7 +33,7 @@ RSpec.configure do |config|
 
   config.shared_context_metadata_behavior = :apply_to_host_groups
 
-  config.fixture_path = ::File.join(::EacRubyGemSupport::Rspec.default.app_root_path, 'test',
+  config.fixture_path = ::File.join(::EacRubyGemSupport::Rspec.default.app_root_path, 'spec',
                                     'fixtures')
   config.use_transactional_fixtures = true
   config.infer_spec_type_from_file_location!
