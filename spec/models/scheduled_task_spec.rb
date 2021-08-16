@@ -3,28 +3,37 @@
 ::RSpec.describe(::ScheduledTask) do
   fixtures :scheduled_tasks
 
-  let(:scheduling_valid_values) do
+  let(:instance) { scheduled_tasks(:test_scheduling) }
+  let(:time) { ::Time.utc(2016, 12, 22, 12, 0, 0, 0) }
+
+  describe '#scheduling' do
     {
       '0 1 * * *' => Time.utc(2016, 12, 23, 1, 0, 0, 0),
       '*/5 * * * *' => Time.utc(2016, 12, 22, 12, 5, 0, 0),
       '* * 1 * *' => Time.utc(2017, 1, 1, 0, 0, 0, 0),
       '* * * * *' => Time.utc(2016, 12, 22, 12, 1, 0, 0)
-    }
-  end
-  let(:scheduling_invalid_values) { ['  ', nil, '1', 'abc123', 456] }
-  let(:instance) { scheduled_tasks(:test_scheduling) }
-  let(:time) { ::Time.utc(2016, 12, 22, 12, 0, 0, 0) }
+    }.each do |scheduling, expected_next_run|
+      context "when sheduling is #{scheduling}" do
+        before { instance.scheduling = scheduling }
 
-  it 'scheduling cron format' do
-    valid_invalid_column_values_test(
-      instance, :scheduling, scheduling_valid_values.keys, scheduling_invalid_values
-    )
-  end
+        it 'is valid' do
+          expect(instance.valid?).to be_truthy, instance.errors.messages.to_s
+        end
 
-  it 'calculate next run' do
-    scheduling_valid_values.each do |k, v|
-      instance.scheduling = k
-      expect(instance.calculate_next_run(time).utc).to eq(v), "Time: #{time}, Cron source: #{k}"
+        it "calculate next run as #{expected_next_run}" do
+          expect(instance.calculate_next_run(time).utc).to eq(expected_next_run)
+        end
+      end
+    end
+
+    ['  ', nil, '1', 'abc123', 456].each do |scheduling|
+      context "when sheduling is #{scheduling}" do
+        before { instance.scheduling = scheduling }
+
+        it 'is invalid' do
+          expect(instance.valid?).to be_falsy, instance.errors.messages.to_s
+        end
+      end
     end
   end
 
@@ -108,10 +117,19 @@
   end
 
   describe 'task in list' do
-    it do
-      valid_invalid_column_values_test(
-        instance, :task, ['test', 'about', 'db:migrate'], [nil, '  ', '123notatask']
-      )
+    ['test', 'about', 'db:migrate'].each do |task|
+      context "when task is #{task}" do
+        before { instance.task = task }
+
+        it { expect(instance).to be_valid }
+      end
+    end
+    [nil, '  ', '123notatask'].each do |task|
+      context "when task is #{task}" do
+        before { instance.task = task }
+
+        it { expect(instance).not_to be_valid }
+      end
     end
   end
 
@@ -127,18 +145,6 @@
 
         it { expect(instance.send('invoke_args')).to eq(expected) }
       end
-    end
-  end
-
-  def valid_invalid_column_values_test(record, column, valid_values, invalid_values)
-    valid_values.each do |v|
-      record[column] = v
-      expect(record.valid?).to be_truthy, "#{record.errors.messages}, #{column} = #{v.inspect}" \
-        ' should be valid'
-    end
-    invalid_values.each do |v|
-      record[column] = v
-      expect(record.valid?).to be_falsy, "#{column} = #{v.inspect} should be invalid"
     end
   end
 end
