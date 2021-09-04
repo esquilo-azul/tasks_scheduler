@@ -62,7 +62,7 @@ class ScheduledTask < ActiveRecord::Base
     end
   end
 
-  def write_attribute(name, value)
+  def _write_attribute(name, value)
     @cron_parser = nil if name == 'scheduling'
     super
   end
