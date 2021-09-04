@@ -20,7 +20,6 @@ Gem::Specification.new do |s|
   s.bindir = 'exe'
   s.executables = s.files.grep(%r{^exe/}) { |f| File.basename(f) }
 
-  s.add_dependency 'active_scaffold'
   s.add_dependency 'daemons'
   s.add_dependency 'eac_active_scaffold', '~> 0.1'
   s.add_dependency 'eac_ruby_gems_utils', '~> 0.4', '>= 0.4.1'
