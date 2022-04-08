@@ -17,7 +17,7 @@ module TasksScheduler
       end
 
       def tasks_running_limit
-        ENV[TASKS_LIMIT_KEY].if_present(TASKS_LIMIT_DEFAULT_VALUE, &:to_i)
+        ENV[TASKS_LIMIT_KEY].if_present(TASKS_LIMIT_DEFAULT_VALUE).to_i
       end
     end
   end
