@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'eac_ruby_gems_utils/gem'
+require 'avm/eac_ruby_base1/sources/base'
 require 'singleton'
 
 module TasksScheduler
@@ -8,7 +8,7 @@ module TasksScheduler
     include ::Singleton
 
     def initialize
-      super(::EacRubyGemsUtils::Gem.new(::Rails.root))
+      super(::Avm::EacRubyBase1::Sources::Base.new(::Rails.root))
     end
 
     def bundle(*args)
