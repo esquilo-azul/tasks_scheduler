@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
   s.executables = s.files.grep(%r{^exe/}) { |f| File.basename(f) }
 
   s.add_dependency 'daemons'
-  s.add_dependency 'eac_active_scaffold', '~> 0.1'
+  s.add_dependency 'eac_active_scaffold', '~> 0.2', '>= 0.2.2'
   s.add_dependency 'eac_ruby_utils', '~> 0.72'
   s.add_dependency 'js-routes', '~> 1.4', '>= 1.4.14'
   s.add_dependency 'parse-cron'
