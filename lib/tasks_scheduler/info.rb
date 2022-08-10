@@ -3,7 +3,7 @@
 module TasksScheduler
   class Info
     TASKS_LIMIT_KEY = 'TASKS_SCHEDULER_TASKS_LIMIT'
-    TASKS_LIMIT_DEFAULT_VALUE = '-1'
+    TASKS_LIMIT_DEFAULT_VALUE = -1
 
     class << self
       def can_run_new_task?
