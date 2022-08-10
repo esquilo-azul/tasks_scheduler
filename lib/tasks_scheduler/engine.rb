@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'eac_active_scaffold'
-require 'js-routes'
 
 module TasksScheduler
   class Engine < ::Rails::Engine
