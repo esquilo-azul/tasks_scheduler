@@ -1,3 +1,5 @@
+//= require eac_rails_utils/url_helper
+
 if (typeof TasksScheduler == "undefined") {
   TasksScheduler = function() {};
 }
@@ -9,7 +11,7 @@ _A = TasksScheduler.Alert;
 _A.DEFAULT_REFRESH_INTERVAL = 5000;
 _A.DEFAULT_ELEMENT_SELECTOR = '#tasks_scheduler_alert';
 _A.CSS_CLASSES_PREFIX = 'alert_';
-_A.url = Routes.status_tasks_scheduler_daemon_path();
+_A.url = EacRailsUtils.UrlHelper.path_for('/tasks_scheduler_daemon/status');
 
 _A.init = function(options) {
   options = typeof options !== 'undefined' ? options : {};
