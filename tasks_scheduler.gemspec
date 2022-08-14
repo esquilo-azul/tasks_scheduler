@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
   s.executables = s.files.grep(%r{^exe/}) { |f| File.basename(f) }
 
   s.add_dependency 'avm-eac_ruby_base1', '~> 0.8', '>= 0.8.1'
-  s.add_dependency 'daemons'
+  s.add_dependency 'daemons', '~> 1.4', '>= 1.4.1'
   s.add_dependency 'eac_active_scaffold', '~> 0.2', '>= 0.2.2'
   s.add_dependency 'eac_ruby_utils', '~> 0.95', '>= 0.95.1'
   s.add_dependency 'js-routes', '~> 1.4', '>= 1.4.14'
