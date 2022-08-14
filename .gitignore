@@ -1,5 +1,5 @@
-.bundle/
-Gemfile.local
-Gemfile.lock
-log/*.log
-pkg/
+/.bundle/
+/Gemfile.local
+/Gemfile.lock
+/log/*.log
+/pkg/
