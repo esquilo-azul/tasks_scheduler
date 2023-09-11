@@ -15,7 +15,7 @@ class ScheduledTask < ActiveRecord::Base
   class << self
     def rake_tasks
       @rake_tasks ||= begin
-        Rails.application.load_tasks
+        Rails.application.load_tasks if Rake.application.tasks.empty?
         Rake.application.tasks.map(&:name)
       end
     end
