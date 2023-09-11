@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'daemons', '~> 1.4', '>= 1.4.1'
   s.add_dependency 'eac_active_scaffold', '~> 0.5', '>= 0.5.1'
   s.add_dependency 'eac_rails_utils', '~> 0.21'
-  s.add_dependency 'eac_ruby_utils', '~> 0.95', '>= 0.95.1'
+  s.add_dependency 'eac_ruby_utils', '~> 0.119', '>= 0.119.2'
   s.add_dependency 'parse-cron', '~> 0.1', '>= 0.1.4'
   s.add_dependency 'rails', '>= 4.2.11'
 
