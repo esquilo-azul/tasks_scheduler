@@ -8,7 +8,7 @@ module TasksSchedulerHelper
   }.freeze
 
   def tasks_scheduler_navbar
-    content_tag(:navbar) do
+    tag.navbar do
       safe_join(tasks_scheduler_navbar_entries.map { |label, path| link_to label, path }, ' | ')
     end
   end

@@ -6,7 +6,7 @@ module TasksScheduler
       return if value_valid?(value)
 
       record.errors[attribute] << (options[:message] ||
-          I18n.translate(:cron_scheduling_validator_error_message))
+          I18n.t(:cron_scheduling_validator_error_message))
     end
 
     private

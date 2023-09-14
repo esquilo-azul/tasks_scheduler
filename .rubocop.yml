@@ -1,14 +1,9 @@
-require:
-  - rubocop-rails
-  - rubocop-rspec
+inherit_gem:
+  eac_ruby_gem_support: .rubocop.yml
 
 AllCops:
-  TargetRubyVersion: 2.4
   Exclude:
     - '**/*/db/schema.rb'
-
-Layout/LineLength:
-  Max: 100
 
 Metrics/AbcSize:
   Exclude:
@@ -30,6 +25,9 @@ Style/Documentation:
   Enabled: false
 
 Style/AsciiComments:
+  Enabled: false
+
+Style/GlobalStdStream:
   Enabled: false
 
 Style/HashEachMethods:
