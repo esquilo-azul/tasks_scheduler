@@ -4,6 +4,15 @@ en:
       scheduled_task:
         one: Scheduled task
         other: Scheduled tasks
+  eac_rails_utils:
+    menus:
+      root:
+        admin:
+          tasks_scheduler:
+            __self: Tasks scheduler
+            main_app_tasks_scheduler_daemon: Daemon
+            main_app_scheduled_tasks: Tasks
+            main_app_status_scheduled_tasks: Status
   helpers:
       label:
         scheduled_task:

@@ -4,6 +4,15 @@ pt-BR:
       scheduled_task:
         one: Tarefa agendada
         other: Tarefas agendadas
+  eac_rails_utils:
+    menus:
+      root:
+        admin:
+          tasks_scheduler:
+            __self: 'Agendador de tarefas'
+            main_app_tasks_scheduler_daemon: Daemon
+            main_app_scheduled_tasks: Tarefas
+            main_app_status_scheduled_tasks: Situação
   helpers:
       label:
         scheduled_task:
