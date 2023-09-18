@@ -1,7 +1,9 @@
-inherit_gem:
-  eac_ruby_gem_support: .rubocop.yml
+require:
+  - rubocop-rails
+  - rubocop-rspec
 
 AllCops:
+  TargetRubyVersion: 2.7
   Exclude:
     - '**/*/db/schema.rb'
 
@@ -18,6 +20,9 @@ Metrics/MethodLength:
   Exclude:
     - '**/db/migrate/*'
 
+Layout/LineLength:
+  Max: 100
+
 Rails/ApplicationRecord:
   Enabled: false
 
@@ -25,9 +30,6 @@ Style/Documentation:
   Enabled: false
 
 Style/AsciiComments:
-  Enabled: false
-
-Style/GlobalStdStream:
   Enabled: false
 
 Style/HashEachMethods:

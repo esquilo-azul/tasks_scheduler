@@ -11,7 +11,7 @@ module TasksScheduler
         raise "Action not allowed: #{action} (Allowed: #{ACTIONS})" unless ACTIONS.include?(action)
 
         ::TasksScheduler::AppGem.instance.bundle('exec', 'tasks_scheduler', action)
-          .envvar(::TasksScheduler::Checker::LOG_ON_FILE_ENV_KEY, '1')
+                                .envvar(::TasksScheduler::Checker::LOG_ON_FILE_ENV_KEY, '1')
       end
 
       def execute(action)
