@@ -1,9 +1,6 @@
 ---
 inherit_gem:
   eac_rails_gem_support: ".rubocop.yml"
-Layout/MultilineMethodCallIndentation:
-  Exclude:
-  - lib/tasks_scheduler/daemon.rb
 Layout/RescueEnsureAlignment:
   Exclude:
   - app/models/scheduled_task.rb
