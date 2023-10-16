@@ -1,9 +1,6 @@
 ---
 inherit_gem:
   eac_rails_gem_support: ".rubocop.yml"
-Rails/DeprecatedActiveModelErrorsMethods:
-  Exclude:
-  - lib/tasks_scheduler/cron_scheduling_validator.rb
 Rails/FilePath:
   Exclude:
   - lib/tasks_scheduler/checker/log.rb
