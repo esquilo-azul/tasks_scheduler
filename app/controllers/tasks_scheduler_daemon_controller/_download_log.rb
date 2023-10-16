@@ -35,7 +35,7 @@ class TasksSchedulerDaemonController < ApplicationController
     send_file(
       log.path,
       filename: "#{request.base_url.parameterize}_tasks-scheduler_checker-log_" \
-        "#{Time.zone.now.to_s.parameterize}.log",
+                "#{Time.zone.now.to_s.parameterize}.log",
       type: 'text/plain'
     )
   end
