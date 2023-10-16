@@ -20,9 +20,9 @@ class ScheduledTask < ActiveRecord::Base
       log_file = log_file(LOG_RUNNING)
       FileUtils.mkdir_p(File.dirname(log_file))
       FileUtils.rm_f(log_file)
-      STDOUT.reopen(log_file, 'w')
-      STDERR.reopen(log_file, 'w')
-      Rails.logger = ActiveSupport::Logger.new(STDOUT)
+      $stdout.reopen(log_file, 'w')
+      $stderr.reopen(log_file, 'w')
+      Rails.logger = ActiveSupport::Logger.new($stdout)
     end
 
     def log_on_end(exception)
