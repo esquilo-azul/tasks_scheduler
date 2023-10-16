@@ -31,7 +31,7 @@ module TasksScheduler
     end
 
     LOGS_KEYS.each do |log_key|
-      class_eval <<CODE, __FILE__, __LINE__ + 1
+      class_eval <<CODE, __FILE__, __LINE__ + 1 # rubocop:disable Style/DocumentDynamicEvalDefinition
       def #{log_key}_log
         @#{log_key}_log ||= ::TasksScheduler::Checker::Log.new('#{log_key}')
       end
