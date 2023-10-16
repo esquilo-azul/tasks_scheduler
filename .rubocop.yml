@@ -1,9 +1,6 @@
 ---
 inherit_gem:
   eac_rails_gem_support: ".rubocop.yml"
-Lint/NonAtomicFileOperation:
-  Exclude:
-  - app/models/scheduled_task/log.rb
 Rails/ActionControllerFlashBeforeRender:
   Exclude:
   - app/controllers/scheduled_tasks_controller.rb

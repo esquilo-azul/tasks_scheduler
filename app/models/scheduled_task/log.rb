@@ -19,7 +19,7 @@ class ScheduledTask < ActiveRecord::Base
     def log_on_start
       log_file = log_file(LOG_RUNNING)
       FileUtils.mkdir_p(File.dirname(log_file))
-      File.unlink(log_file) if File.exist?(log_file)
+      FileUtils.rm_f(log_file)
       STDOUT.reopen(log_file, 'w')
       STDERR.reopen(log_file, 'w')
       Rails.logger = ActiveSupport::Logger.new(STDOUT)
@@ -30,7 +30,7 @@ class ScheduledTask < ActiveRecord::Base
       return unless ::File.exist?(running_log)
 
       target_log = exception ? log_file(LOG_UNSUCCESSFUL) : log_file(LOG_SUCCESSFUL)
-      File.unlink(target_log) if File.exist?(target_log)
+      FileUtils.rm_f(target_log)
       File.rename(running_log, target_log)
     end
   end
