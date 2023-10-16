@@ -7,7 +7,7 @@ module TasksScheduler
     class Log
       class << self
         def logs_directory
-          @logs_directory ||= ::Rails.root.join('log', 'tasks_scheduler', 'checker')
+          @logs_directory ||= ::Rails.root.join('log/tasks_scheduler/checker')
         end
       end
 

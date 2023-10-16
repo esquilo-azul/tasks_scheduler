@@ -1,9 +1,6 @@
 ---
 inherit_gem:
   eac_rails_gem_support: ".rubocop.yml"
-Rails/FilePath:
-  Exclude:
-  - lib/tasks_scheduler/checker/log.rb
 Rails/RedundantActiveRecordAllMethod:
   Exclude:
   - lib/tasks_scheduler/checker.rb
