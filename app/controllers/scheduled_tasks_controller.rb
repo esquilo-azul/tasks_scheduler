@@ -39,7 +39,7 @@ class ScheduledTasksController < ApplicationController
     process_action_link_action do |record|
       record.update!(next_run: Time.zone.now)
       record.reload
-      flash[:info] = "Next run adjusted to #{record.next_run}"
+      flash.now[:info] = "Next run adjusted to #{record.next_run}"
     end
   end
 end
