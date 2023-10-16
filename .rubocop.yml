@@ -1,9 +1,6 @@
 ---
 inherit_gem:
   eac_rails_gem_support: ".rubocop.yml"
-Gemspec/DeprecatedAttributeAssignment:
-  Exclude:
-  - tasks_scheduler.gemspec
 Layout/LineEndStringConcatenationIndentation:
   Exclude:
   - app/controllers/tasks_scheduler_daemon_controller/_download_log.rb
