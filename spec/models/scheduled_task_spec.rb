@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-::RSpec.describe(::ScheduledTask) do
+RSpec.describe(ScheduledTask) do
   fixtures :scheduled_tasks
 
   let(:instance) { scheduled_tasks(:test_scheduling) }
-  let(:time) { ::Time.utc(2016, 12, 22, 12, 0, 0, 0) }
+  let(:time) { Time.utc(2016, 12, 22, 12, 0, 0, 0) }
 
   describe '#scheduling' do
     {
@@ -43,7 +43,7 @@
     it { expect(instance.last_run_unsuccessful_start).to be_falsy }
     it { expect(instance.last_run_successful_end).to be_falsy }
     it { expect(instance.last_run_unsuccessful_end).to be_falsy }
-    it { expect(instance.status).to eq(::ScheduledTask::STATUS_WAITING) }
+    it { expect(instance.status).to eq(ScheduledTask::STATUS_WAITING) }
 
     context 'when start' do
       subject { instance.status }
@@ -111,7 +111,7 @@
       end
 
       it do
-        expect(instance.status).to eq(::ScheduledTask::STATUS_FAILED)
+        expect(instance.status).to eq(ScheduledTask::STATUS_FAILED)
       end
     end
   end

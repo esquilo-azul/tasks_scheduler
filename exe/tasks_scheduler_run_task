@@ -13,4 +13,4 @@ end
 
 rails_root = find_rails_root
 require File.join(rails_root, 'config', 'environment')
-::ScheduledTask.find(ARGV[0].to_i).run
+ScheduledTask.find(ARGV[0].to_i).run

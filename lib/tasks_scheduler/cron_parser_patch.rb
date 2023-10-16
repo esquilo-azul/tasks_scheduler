@@ -26,6 +26,6 @@ module TasksScheduler
   end
 end
 
-unless ::CronParser.included_modules.include?(::TasksScheduler::CronParserPatch)
-  ::CronParser.include(::TasksScheduler::CronParserPatch)
+unless CronParser.included_modules.include?(TasksScheduler::CronParserPatch)
+  CronParser.include(TasksScheduler::CronParserPatch)
 end
