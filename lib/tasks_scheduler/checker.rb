@@ -16,7 +16,7 @@ module TasksScheduler
       Signal.trap('TERM') { running = false }
       while running
         Rails.logger.info('Checking all tasks...')
-        ::ScheduledTask.all.order(next_run: :asc).each(&:check)
+        ::ScheduledTask.order(next_run: :asc).each(&:check)
         Rails.logger.info("All tasks checked. Sleeping for #{CHECK_INTERVAL} second(s)...")
         sleep(CHECK_INTERVAL)
       end
