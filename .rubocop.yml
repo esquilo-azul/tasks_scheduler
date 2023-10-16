@@ -1,9 +1,6 @@
 ---
 inherit_gem:
   eac_rails_gem_support: ".rubocop.yml"
-Style/FetchEnvVar:
-  Exclude:
-  - app/models/scheduled_task.rb
 Style/GlobalStdStream:
   Exclude:
   - app/models/scheduled_task/log.rb

@@ -22,7 +22,7 @@ class ScheduledTask < ActiveRecord::Base
 
     def timeout
       @timeout ||= begin
-        r = Integer(ENV[DEFAULT_TIMEOUT_ENVVAR_NAME])
+        r = Integer(ENV.fetch(DEFAULT_TIMEOUT_ENVVAR_NAME, nil))
         r.positive? ? r.seconds : DEFAULT_TIMEOUT
       rescue ArgumentError, TypeError
         DEFAULT_TIMEOUT
