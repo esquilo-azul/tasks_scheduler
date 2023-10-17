@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'eac_active_scaffold'
+require 'eac_rails_utils/engine'
 
 module TasksScheduler
   class Engine < ::Rails::Engine
