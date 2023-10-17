@@ -2,13 +2,10 @@
 
 require 'eac_active_scaffold'
 require 'eac_rails_utils/engine'
+require 'eac_rails_utils/engine_helper'
 
 module TasksScheduler
   class Engine < ::Rails::Engine
-    initializer :append_migrations do |app|
-      config.paths['db/migrate'].expanded.each do |expanded_path|
-        app.config.paths['db/migrate'] << expanded_path
-      end
-    end
+    include ::EacRailsUtils::EngineHelper
   end
 end
