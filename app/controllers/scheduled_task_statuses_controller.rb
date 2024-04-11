@@ -6,7 +6,7 @@ class ScheduledTaskStatusesController < ApplicationController
     @log_file = record.log_file(params[:identifier])
   end
 
-  def status; end
+  def index; end
 
   def status_content
     @scheduled_tasks = ::ScheduledTask.order(task: :asc, scheduling: :asc)

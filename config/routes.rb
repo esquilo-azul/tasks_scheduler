@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources(:scheduled_task_statuses, only: []) do
+  resources(:scheduled_task_statuses, only: [:index]) do
     collection do
-      get :status
       get :status_content
     end
     member do

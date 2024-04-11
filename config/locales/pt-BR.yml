@@ -12,7 +12,7 @@ pt-BR:
             __self: 'Agendador de tarefas'
             main_app_tasks_scheduler_daemon: Daemon
             main_app_scheduled_tasks: Tarefas
-            main_app_status_scheduled_task_statuses: Situação
+            main_app_scheduled_task_statuses: Situação
   helpers:
       label:
         scheduled_task:

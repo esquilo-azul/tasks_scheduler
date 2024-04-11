@@ -12,7 +12,7 @@ en:
             __self: Tasks scheduler
             main_app_tasks_scheduler_daemon: Daemon
             main_app_scheduled_tasks: Tasks
-            main_app_status_scheduled_task_statuses: Status
+            main_app_scheduled_task_statuses: Status
   helpers:
       label:
         scheduled_task:
