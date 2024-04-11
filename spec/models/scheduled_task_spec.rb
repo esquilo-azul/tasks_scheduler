@@ -52,17 +52,17 @@ RSpec.describe(ScheduledTask) do
 
       it { is_expected.to eq(ScheduledTask::STATUS_RUNNING) }
 
-      context 'when stop' do # rubocop:disable RSpec/NestedGroups
+      context 'when stop' do
         before { instance.send('status_on_end', nil, nil) }
 
         it { is_expected.to eq(ScheduledTask::STATUS_WAITING) }
 
-        context 'when start again' do # rubocop:disable RSpec/NestedGroups
+        context 'when start again' do
           before { instance.send('status_on_start') }
 
           it { is_expected.to eq(ScheduledTask::STATUS_RUNNING) }
 
-          context 'when fail' do # rubocop:disable RSpec/NestedGroups
+          context 'when fail' do
             before do
               instance.send('status_on_end', StandardError.new('Test!'),
                             ScheduledTask::STATUS_FAILED)
@@ -71,7 +71,7 @@ RSpec.describe(ScheduledTask) do
             it { is_expected.to eq(ScheduledTask::STATUS_FAILED) }
           end
 
-          context 'when abort' do # rubocop:disable RSpec/NestedGroups
+          context 'when abort' do
             before do
               instance.send('status_on_end', StandardError.new('Test!'),
                             ScheduledTask::STATUS_ABORTED)
@@ -80,7 +80,7 @@ RSpec.describe(ScheduledTask) do
             it { is_expected.to eq(ScheduledTask::STATUS_ABORTED) }
           end
 
-          context 'when time out' do # rubocop:disable RSpec/NestedGroups
+          context 'when time out' do
             before do
               instance.send('status_on_end', StandardError.new('Test!'),
                             ScheduledTask::STATUS_TIMEOUT)
