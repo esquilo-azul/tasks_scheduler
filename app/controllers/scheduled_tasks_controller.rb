@@ -23,18 +23,6 @@ class ScheduledTasksController < ApplicationController
                                     crud_type: :update, method: :put, position: false
   end
 
-  def log
-    record = find_if_allowed(params[:id], :read)
-    @log_file = record.log_file(params[:identifier])
-  end
-
-  def status; end
-
-  def status_content
-    @scheduled_tasks = ::ScheduledTask.order(task: :asc, scheduling: :asc)
-    render layout: false
-  end
-
   def run_now
     process_action_link_action do |record|
       record.update!(next_run: Time.zone.now)

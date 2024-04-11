@@ -1,13 +1,17 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources(:scheduled_tasks, concerns: active_scaffold) do
+  resources(:scheduled_task_statuses, only: []) do
     collection do
       get :status
       get :status_content
     end
     member do
       get :log
+    end
+  end
+  resources(:scheduled_tasks, concerns: active_scaffold) do
+    member do
       put :run_now
     end
   end
