@@ -26,7 +26,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'eac_rails_utils', '~> 0.23', '>= 0.23.2'
   s.add_dependency 'eac_ruby_utils', '~> 0.121'
   s.add_dependency 'parse-cron', '~> 0.1', '>= 0.1.4'
-  s.add_dependency 'rails', '>= 4.2.11'
 
   s.add_development_dependency 'eac_rails_gem_support', '~> 0.8.0'
 end
