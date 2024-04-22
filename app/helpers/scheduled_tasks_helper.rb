@@ -11,7 +11,8 @@ module ScheduledTasksHelper
 
   def scheduled_tasks_log(scheduled_task, log_identifier)
     if File.exist?(scheduled_task.log_file(log_identifier))
-      link_to I18n.t(:log), log_scheduled_task_path(scheduled_task, identifier: log_identifier)
+      link_to I18n.t(:log),
+              log_scheduled_task_status_path(scheduled_task, identifier: log_identifier)
     else
       '-'
     end
