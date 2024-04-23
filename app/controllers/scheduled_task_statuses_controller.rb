@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class ScheduledTaskStatusesController < ApplicationController
+  active_scaffold :scheduled_task do |_conf|
+    config.actions = []
+  end
+
   def log
     record = find_if_allowed(params[:id], :read)
     @log_file = record.log_file(params[:identifier])
