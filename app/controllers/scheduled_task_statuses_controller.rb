@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class ScheduledTaskStatusesController < ApplicationController
-  active_scaffold :scheduled_task do |_conf|
-    config.actions = []
+  active_scaffold :scheduled_task do |conf|
+    conf.actions = []
   end
 
   def log
