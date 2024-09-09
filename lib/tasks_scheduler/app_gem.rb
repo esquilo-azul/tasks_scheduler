@@ -12,7 +12,7 @@ module TasksScheduler
     end
 
     def bundle(*args)
-      super(*args).chdir_root.envvar('RAILS_ENV', ::Rails.env)
+      super.chdir_root.envvar('RAILS_ENV', ::Rails.env)
     end
   end
 end
