@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'eac_ruby_utils/core_ext'
+require 'parse-cron'
 require 'rake'
 
 class ScheduledTask < ActiveRecord::Base
