@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'parse-cron'
+
 module TasksScheduler
   class CronSchedulingValidator < ActiveModel::EachValidator
     def validate_each(record, attribute, value)
