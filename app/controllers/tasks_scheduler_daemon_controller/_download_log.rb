@@ -16,7 +16,7 @@ class TasksSchedulerDaemonController < ApplicationController
     params[:log_key]
   end
 
-  def download_log_validate_log_key
+  def download_log_validate_log_key # rubocop:disable Naming/PredicateMethod
     return true if ::TasksScheduler::Checker::LOGS_KEYS.include?(download_log_key)
 
     redirect_to(tasks_scheduler_daemon_path,
@@ -24,7 +24,7 @@ class TasksSchedulerDaemonController < ApplicationController
     false
   end
 
-  def download_log_validate_log_exist(log)
+  def download_log_validate_log_exist(log) # rubocop:disable Naming/PredicateMethod
     return true if log.exist?
 
     redirect_to(tasks_scheduler_daemon_path, notice: "Log \"#{log.key}\" does not exist.")

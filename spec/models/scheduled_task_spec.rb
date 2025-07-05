@@ -17,7 +17,7 @@ RSpec.describe(ScheduledTask) do
         before { instance.scheduling = scheduling }
 
         it 'is valid' do
-          expect(instance.valid?).to be_truthy, instance.errors.messages.to_s
+          expect(instance).to be_valid, instance.errors.messages.to_s
         end
 
         it "calculate next run as #{expected_next_run}" do
@@ -31,7 +31,7 @@ RSpec.describe(ScheduledTask) do
         before { instance.scheduling = scheduling }
 
         it 'is invalid' do
-          expect(instance.valid?).to be_falsy, instance.errors.messages.to_s
+          expect(instance).not_to be_valid, instance.errors.messages.to_s
         end
       end
     end

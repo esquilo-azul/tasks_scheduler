@@ -7,8 +7,8 @@ module TasksScheduler
     def validate_each(record, attribute, value)
       return if value_valid?(value)
 
-      record.errors.add(attribute, (options[:message] ||
-          I18n.t(:cron_scheduling_validator_error_message)))
+      record.errors.add(attribute, options[:message] ||
+          I18n.t(:cron_scheduling_validator_error_message))
     end
 
     private
