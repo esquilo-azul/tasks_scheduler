@@ -56,10 +56,8 @@ class ScheduledTask < ActiveRecord::Base
   end
 
   def calculate_next_run(time = nil)
-    if time.present?
-      cron_parser.next(time.utc)
-    else
-      cron_parser.next
+    (time.present? ? cron_parser.next(time.utc) : cron_parser.next).then do |v|
+      Time.utc(v.year, v.month, v.day, v.hour, v.min, v.sec)
     end
   end
 
