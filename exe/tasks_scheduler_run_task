@@ -1,9 +1,6 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-require 'rubygems'
-require 'daemons'
-
 def find_rails_root(dir = Dir.pwd)
   raise 'Rails root not found' if ['', '/', '.'].include?(dir)
   return dir if File.exist?(File.expand_path('config/environment.rb', dir))

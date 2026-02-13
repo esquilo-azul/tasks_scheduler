@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'tasks_scheduler/checker'
-
 class TasksSchedulerDaemonController < ApplicationController
   include ::TasksSchedulerDaemonController::DownloadLog
 

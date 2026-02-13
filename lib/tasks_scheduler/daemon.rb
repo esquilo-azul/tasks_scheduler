@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'tasks_scheduler/app_gem'
-
 module TasksScheduler
   class Daemon
     ACTIONS = %w[status start stop restart].freeze

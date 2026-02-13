@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require 'rake'
-require 'eac_ruby_utils/ruby'
-
 class ScheduledTask < ActiveRecord::Base
   module Checker
     def check

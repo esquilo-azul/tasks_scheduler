@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'avm/eac_ruby_base1/sources/base'
 require 'singleton'
 
 module TasksScheduler
