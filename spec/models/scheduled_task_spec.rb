@@ -117,7 +117,7 @@ RSpec.describe(ScheduledTask) do
   end
 
   describe 'task in list' do
-    ['test', 'about', 'db:migrate'].each do |task|
+    ['test', 'tmp:clear', 'db:migrate'].each do |task|
       context "when task is #{task}" do
         before { instance.task = task }
 
